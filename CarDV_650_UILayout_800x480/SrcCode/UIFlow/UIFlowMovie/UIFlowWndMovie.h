@@ -14,9 +14,9 @@ extern VControl UIFlowWndMovie_Status_CyclicRecCtrl;//Status type
 typedef enum
 {
 UIFlowWndMovie_Status_CyclicRec_ICONID_NULL,
+UIFlowWndMovie_Status_CyclicRec_ICON_CYCLIC_REC_1MIN,
 UIFlowWndMovie_Status_CyclicRec_ICON_CYCLIC_REC_3MIN,
 UIFlowWndMovie_Status_CyclicRec_ICON_CYCLIC_REC_5MIN,
-UIFlowWndMovie_Status_CyclicRec_ICON_CYCLIC_REC_10MIN,
 UIFlowWndMovie_Status_CyclicRec_MAX
 }UIFlowWndMovie_Status_CyclicRec_Setting;
 

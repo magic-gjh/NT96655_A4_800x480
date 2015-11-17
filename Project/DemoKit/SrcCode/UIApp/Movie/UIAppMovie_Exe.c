@@ -1898,15 +1898,15 @@ UINT32 Movie_GetCyclicRecTime(void)
         break;
 #else
     case MOVIE_CYCLICREC_3MIN:
-        uiCyclicRecTime = 180;
+        uiCyclicRecTime = 60;
         break;
 
     case MOVIE_CYCLICREC_5MIN:
-        uiCyclicRecTime = 300;
+        uiCyclicRecTime = 180;
         break;
 
     case MOVIE_CYCLICREC_10MIN:
-        uiCyclicRecTime = 600;
+        uiCyclicRecTime = 300;
         break;
 
     case MOVIE_CYCLICREC_OFF:
