@@ -488,6 +488,7 @@ void SysCheckFlag(void)
     SysLimitFlag(FL_USB_MODE,           0,  USB_MODE_ID_MAX,            DEFAULT_USB_MODE);
     SysLimitFlag(FL_LCDOFF,             0,  LCDOFF_SETTING_MAX,          DEFAULT_LCDOFF);
     SysLimitFlag(FL_LEDSET,                0,  LED_ID_MAX,             DEFAULT_LED);
+	SysLimitFlag(FL_CAR_NUM,            0,  CAR_NUM_ID_MAX,          CAR_NUM_OFF);
 
     // Sepcial flags
     SysLimitFlag(FL_DCF_DIR_ID,         MIN_DCF_DIR_NUM,    MAX_DCF_DIR_NUM,    MIN_DCF_DIR_NUM);
@@ -608,7 +609,7 @@ void SysResetFlag(void)
     SysSetFlag(FL_LCDOFF,               DEFAULT_LCDOFF);
     SysSetFlag(FL_LEDSET,                  DEFAULT_LED);
     SysSetFlag(FL_DELAYOFF,          DEFAULT_DELAYOFF);
-	
+	SysSetFlag(FL_CAR_NUM,	           DEFAULT_CARNUM);
 
     SysSetFixedFlag();
 

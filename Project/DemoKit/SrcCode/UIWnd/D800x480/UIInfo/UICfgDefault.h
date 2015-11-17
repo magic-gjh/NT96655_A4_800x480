@@ -16,7 +16,7 @@
 #define DEFAULT_SHARPNESS               SHARPNESS_NORMAL
 #define DEFAULT_SATURATION              SATURATION_NORMAL
 #define DEFAULT_FD                      FD_OFF
-#define DEFAULT_ANTISHAKING             ANTISHAKE_OFF
+#define DEFAULT_ANTISHAKING             ANTISHAKE_ON
 #define DEFAULT_QUICK_REVIEW            QUICK_REVIEW_0SEC
 #define DEFAULT_DATE_STAMP              DATE_STAMP_DATE_TIME
 #define DEFAULT_SELFTIMER               SELFTIMER_OFF
@@ -39,7 +39,7 @@
 #define DEFAULT_MOVIE_MOTION_DET        MOVIE_MOTIONDET_OFF
 #define DEFAULT_MOVIE_AUDIO             MOVIE_AUDIO_ON
 #define DEFAULT_MOVIE_DATEIMPRINT       MOVIE_DATEIMPRINT_ON
-#define DEFAULT_MOVIE_HDR               MOVIE_HDR_OFF
+#define DEFAULT_MOVIE_HDR               MOVIE_HDR_ON
 #define DEFAULT_MOVIE_GPS               GPS_ON
 #define DEFAULT_MOVIE_GSENSOR    GSENSOR_MED
 #define DEFAULT_MOVIE_PARKING           MOVIE_PARKING_OFF
@@ -80,6 +80,7 @@
 #define DEFAULT_LED                     LED_OFF
 #define DEFAULT_LCDOFF               LCDOFF_ON
 #define DEFAULT_DELAYOFF            DELAYOFF_10SEC
+#define DEFAULT_CARNUM              CAR_NUM_OFF
 //-----------------------------------------------------------------------------
 // System
 //-----------------------------------------------------------------------------

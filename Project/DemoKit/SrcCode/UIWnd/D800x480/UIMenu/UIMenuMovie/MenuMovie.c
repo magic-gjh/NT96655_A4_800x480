@@ -206,7 +206,7 @@ int Movie_MenuCallback(UINT32 uiMessage, UINT32 uiParam)
 	  	if(uwOption==1)
 	  	{
 	            if ((SysGetFlag(FL_LANGUAGE) == LANG_SC)||(SysGetFlag(FL_LANGUAGE) == LANG_TC)) 
-		     {
+		     	{
 	                Ux_OpenWindow(&UIMenuWndSetupCarNumberCtrl, 1, 0);
 	            }
 	            else
