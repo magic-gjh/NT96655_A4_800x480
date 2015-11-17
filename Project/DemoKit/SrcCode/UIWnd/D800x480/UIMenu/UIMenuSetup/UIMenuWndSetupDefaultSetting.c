@@ -98,15 +98,16 @@ INT32 UIMenuWndSetupDefaultSetting_List_Text_OnKeyEnter(VControl *pCtrl, UINT32 
     ui32CurrListItem = UxList_GetData(pCtrl, LST_CURITM);
     switch (ui32CurrListItem)
     {
-    case 0:  //cancel
-        break;
-    case 1:  //OK
-        debug_err(("Reset default setting\n\r"));
-        Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_SYSRESET, 0);
-        break;
-    default:
-        debug_err(("No any is selected for default setting\n\r"));
-        break;
+    	case 0:  //cancel
+        	break;
+    	case 1:  //OK
+        	debug_err(("Reset default setting\n\r"));
+        	Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_SYSRESET, 0);
+			Ux_CloseWindow(&MenuCommonItemCtrl,0);
+        	break;
+    	default:
+        	debug_err(("No any is selected for default setting\n\r"));
+        	break;
     }
     Ux_CloseWindow(&UIMenuWndSetupDefaultSettingCtrl, 0);
     return NVTEVT_CONSUME;
