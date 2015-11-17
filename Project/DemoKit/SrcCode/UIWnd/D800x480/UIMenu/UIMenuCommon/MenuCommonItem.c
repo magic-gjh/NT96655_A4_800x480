@@ -232,16 +232,25 @@ INT32 MenuCommonItem_OnKeyMenu(VControl *pCtrl, UINT32 paramNum, UINT32 *paramAr
     pPage = &pMenu->pPages[pMenu->SelPage];
 
     if (pPage->TextId == STRID_SETUP)
+    {
         Ux_CloseWindow(pCtrl,0);
-    else {
-        if (pMenu->Status == TMS_ON_TAB)
+    }
+    else 
+	{
+        /*if (pMenu->Status == TMS_ON_TAB)
         {
             TM_ShiftTab(pMenu, +1);
             MenuCommonItem_UpdateContent(pMenu);
-        } else {
+        } 
+		else 
+		{
             Ux_CloseWindow(pCtrl,0);
-        }
+        }*/
+
+		TM_ShiftTab(pMenu, +1);
+        MenuCommonItem_UpdateContent(pMenu);
     }
+	
     return NVTEVT_CONSUME;
 }
 INT32 MenuCommonItem_OnKeyMode(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
