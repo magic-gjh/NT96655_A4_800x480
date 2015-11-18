@@ -690,7 +690,8 @@ void FlowPB_UpdateIcons(BOOL bShow)
             FlowPB_IconDrawMovStop(TRUE);
             FlowPB_IconDrawMovBwd(TRUE);
             FlowPB_IconDrawMovFwd(TRUE);
-	      FlowPB_IconDrawMovTotalTime(TRUE);        						
+	        //FlowPB_IconDrawMovTotalTime(TRUE);   
+	        FlowPB_IconDrawMovTotalTime(FALSE);	
         }
 		
     }
