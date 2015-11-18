@@ -91,6 +91,7 @@ typedef enum
     //#NT#2010/10/01#Lincy Lin -end
     NVTEVT_EXE_WIFI_START,
     NVTEVT_EXE_WIFI_STOP,
+    NVTEVT_EXE_MODE_SEL,
 }
 CUSTOM_SYS_EVENT;
 //#NT#2009/10/29#Jeah Yen - end

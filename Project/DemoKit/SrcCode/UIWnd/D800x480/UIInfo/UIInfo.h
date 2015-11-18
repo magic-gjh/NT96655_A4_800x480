@@ -426,6 +426,7 @@ typedef enum
     FL_WIFI_MOVIE_FMT,
     FL_LOW_POWER_TIMELAPSE_REC,
     FL_TIMELAPSE_REC_MERGEYUV,
+    FL_SETUP_MODE,
     FL_IndexInfoMAX
 }UI_IndexInfo;
 
@@ -1450,6 +1451,14 @@ enum _MOVIE_MONITOR
     MOVIE_PARKING_OFF,
     MOVIE_PARKING_ON,
     MOVIE_PARKING_MAX
+};
+
+enum _SETUP_MODE
+{
+    SETUP_MODE_MOVIE,
+    SETUP_MODE_PHOTO,
+    SETUP_MODE_PLAY,
+    SETUP_MODE_MAX
 };
 
 //-----------------------------------------------------------------------------

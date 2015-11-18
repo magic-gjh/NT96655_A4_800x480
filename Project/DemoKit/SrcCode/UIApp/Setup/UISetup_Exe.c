@@ -706,6 +706,48 @@ INT32 SetupExe_OnDelayOff(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
     return NVTEVT_CONSUME;
 }
 
+INT32 SetupExe_OnModeSel(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
+{
+    UINT32 uhSelect = 0,uiChangeTo = 0;
+	UINT32 uiCurMode;
+    debug_msg("[SetupObj] mode sel\r\n");
+
+    if(paramNum>0)
+        uhSelect= paramArray[0];
+
+	uiCurMode = System_GetState(SYS_STATE_CURRMODE);
+
+    UI_SetData(FL_SETUP_MODE,uhSelect);
+
+    switch(uhSelect)
+    {
+        case SETUP_MODE_MOVIE:
+      		debug_msg("SETUP_MODE_MOVIE================1\r\n");
+			uiChangeTo = PRIMARY_MODE_MOVIE;
+        break;
+		
+        case SETUP_MODE_PHOTO:
+			debug_msg("SETUP_MODE_PHOTO================1\r\n");
+			uiChangeTo = PRIMARY_MODE_PHOTO;
+        break;
+		
+        case SETUP_MODE_PLAY:
+			uiChangeTo = PRIMARY_MODE_PLAYBACK;
+            debug_msg("SETUP_MODE_PLAY================1\r\n");
+        break;
+       
+        default:
+            SystemExeErrMsg("Error parameter (%d) with SetupExe_OnModeSel\r\n",uhSelect);
+        break;
+    }
+
+	UI_SetData(FL_PreMode,uiCurMode);
+    UI_SetData(FL_NextMode,uiChangeTo);
+    Ux_SendEvent(0, NVTEVT_SYSTEM_MODE, 1, uiChangeTo);
+
+    return NVTEVT_CONSUME;
+}
+
 ///////////////////////////////////////////////////////////////////
 
 INT32 SetupExe_OnSysReset(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
@@ -1431,7 +1473,7 @@ EVENT_ENTRY UISetupObjCmdMap[] =
     {NVTEVT_EXE_MOVIEDIS,            MovieExe_OnDis               },
     {NVTEVT_EXE_MOVIEGDC,            MovieExe_OnGdc               },
     {NVTEVT_EXE_MOVIESMEAR,          MovieExe_OnSmear             },
-
+	{NVTEVT_EXE_MODE_SEL,          	 SetupExe_OnModeSel           },
     //#NT#2010/12/03#Janice Huang -end
     {NVTEVT_NULL,                    0},  //End of Command Map
 };

@@ -78,6 +78,16 @@ TMDEF_BEGIN_OPTIONS(DELAYOFF)
     TMDEF_OPTION_TEXT(DELAYOFF_20SEC)
     TMDEF_OPTION_TEXT(DELAYOFF_30SEC)
 TMDEF_END_OPTIONS()
+TMDEF_BEGIN_OPTIONS(MOVIE_PARKING)
+    TMDEF_OPTION_TEXT(MOVIE_PARKING_OFF)
+    TMDEF_OPTION_TEXT(MOVIE_PARKING_ON)
+TMDEF_END_OPTIONS()
+
+TMDEF_BEGIN_OPTIONS(SETUP_MODE)
+    TMDEF_OPTION_TEXT(SETUP_MODE_MOVIE)
+    TMDEF_OPTION_TEXT(SETUP_MODE_PHOTO)
+    TMDEF_OPTION_TEXT(SETUP_MODE_PLAY)
+TMDEF_END_OPTIONS()
 
 // --------------------------------------------------------------------------
 // ITEMS
@@ -109,6 +119,7 @@ static int MenuCustom_Version(UINT32 uiMessage, UINT32 uiParam)
 
 // Setup Menu Items
 TMDEF_BEGIN_ITEMS(SETUP)
+	TMDEF_ITEM_TEXTID(SETUP_MODE) 
     TMDEF_ITEM_CUSTOM(DATE_TIME, MenuCustom_DateTime)
     TMDEF_ITEM_TEXTID(AUTO_POWER_OFF)
     TMDEF_ITEM_TEXTID(BEEP)
@@ -128,6 +139,7 @@ TMDEF_BEGIN_ITEMS(SETUP)
 #endif
     TMDEF_ITEM_TEXTID(FREQUENCY)
     //TMDEF_ITEM_TEXTID(SENSOR_ROTATE)
+    TMDEF_ITEM_TEXTID(MOVIE_PARKING) 
     TMDEF_ITEM_CUSTOM(FORMAT, MenuCustom_Format)    
     TMDEF_ITEM_CUSTOM(DEFAULT, MenuCustom_Default)
     TMDEF_ITEM_CUSTOM(VERSION, MenuCustom_Version)
@@ -180,6 +192,12 @@ int Setup_MenuCallback(UINT32 uiMessage, UINT32 uiParam)
             break;			
         case IDM_DELAYOFF:
             Ux_SendEvent(&UISetupObjCtrl, NVTEVT_EXE_DELAYOFF, 1, uwOption);
+            break;
+		case IDM_MOVIE_PARKING:
+            Ux_SendEvent(&CustomMovieObjCtrl, NVTEVT_EXE_MOVIEPARKING, 1, uwOption);
+            break;
+		case IDM_SETUP_MODE:
+			Ux_SendEvent(&UISetupObjCtrl, NVTEVT_EXE_MODE_SEL, 1, uwOption);
             break;
 
         }

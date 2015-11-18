@@ -82,10 +82,10 @@ TMDEF_END_OPTIONS()
 // OPTIONS
 // --------------------------------------------------------------------------
 // Monitor Options
-TMDEF_BEGIN_OPTIONS(MOVIE_PARKING)
+/*TMDEF_BEGIN_OPTIONS(MOVIE_PARKING)
     TMDEF_OPTION_TEXT(MOVIE_PARKING_OFF)
     TMDEF_OPTION_TEXT(MOVIE_PARKING_ON)
-TMDEF_END_OPTIONS()
+TMDEF_END_OPTIONS()*/
 // --------------------------------------------------------------------------
 // ITEMS
 // --------------------------------------------------------------------------
@@ -105,7 +105,7 @@ TMDEF_BEGIN_ITEMS(MOVIE)
     TMDEF_ITEM_TEXTID(MOVIE_DATEIMPRINT)
     TMDEF_ITEM_TEXTID(MOVIE_GSENSOR)
     TMDEF_ITEM_TEXTID(CAR_NUM)        
-    TMDEF_ITEM_TEXTID(MOVIE_PARKING)    
+    //TMDEF_ITEM_TEXTID(MOVIE_PARKING)    
     
 TMDEF_END_ITEMS()
 

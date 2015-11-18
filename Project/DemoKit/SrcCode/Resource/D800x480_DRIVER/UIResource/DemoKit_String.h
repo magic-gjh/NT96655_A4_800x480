@@ -573,5 +573,9 @@ unsigned char gDemoKit_String_AZ[];
 #define STRID_5DDD                               0x01F8
 #define STRID_5B81                               0x01F9
 #define STRID_743C                               0x01FA
+#define STRID_MDOE                               0x01FB
+#define STRID_MODE_VIDEO                         0x01FC
+#define STRID_MODE_PHOTO                         0x01FD
+#define STRID_MODE_PLAYBACK                      0x01FE
 
 #endif //_DEMOKIT_STRING_H_

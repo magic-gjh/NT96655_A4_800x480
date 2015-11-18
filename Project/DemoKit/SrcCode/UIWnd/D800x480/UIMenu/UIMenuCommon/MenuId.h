@@ -67,7 +67,8 @@ enum _MENU_ID
     IDM_DEFAULT,
     IDM_OPENING_LOGO,
     IDM_PLATENUMBER,
-    IDM_VERSION
+    IDM_VERSION,
+    IDM_SETUP_MODE
 };
 
 // Menu String ID
@@ -408,7 +409,13 @@ enum _MENU_IDS
 
     // Opening Logo Display Options
     IDS_LOGO_OFF            = STRID_OFF,
-    IDS_LOGO_ON             = STRID_ON
+    IDS_LOGO_ON             = STRID_ON,
+
+	//setup menu ---mode 
+	IDS_SETUP_MODE            = STRID_MDOE,	
+	IDS_SETUP_MODE_MOVIE      = STRID_MODE_VIDEO,
+	IDS_SETUP_MODE_PHOTO          = STRID_MODE_PHOTO,
+	IDS_SETUP_MODE_PLAY       = STRID_MODE_PLAYBACK
 };
 
 // Menu Icon ID
@@ -532,7 +539,9 @@ enum _MENU_IDI
     IDI_LANG_SC             = ICON_OK,
     IDI_LANG_PB             = ICON_OK,
     IDI_LANG_YI             = ICON_OK,
-    IDI_LANG_PL             = ICON_OK
+    IDI_LANG_PL             = ICON_OK,
+
+	IDI_SETUP_MODE          = ICON_SLIDE_SHOW
 
 };
 
