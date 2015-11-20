@@ -30,6 +30,7 @@ const SOUND_DATA gDemo_Sound[DEMOSOUND_SOUND_MAX_CNT]=
     { g_SoundData_Key,      sizeof(g_SoundData_Key),        AUDIO_SR_32000, FALSE,  DEMOSOUND_SOUND_KEY_TONE        },
     { g_SoundData_Shutter,  sizeof(g_SoundData_Shutter),    AUDIO_SR_32000, FALSE,  DEMOSOUND_SOUND_SHUTTER_TONE    },
     { g_SoundData_PowerOn,  sizeof(g_SoundData_PowerOn),    AUDIO_SR_32000, FALSE,  DEMOSOUND_SOUND_POWERON_TONE    },
+    { g_SoundData_PowerOn_Szx,  sizeof(g_SoundData_PowerOn_Szx),    AUDIO_SR_32000, FALSE,  DEMOSOUND_SOUND_POWERONSZX_TONE    },
 };
 
 static volatile BOOL        bKeyToneEn = TRUE;

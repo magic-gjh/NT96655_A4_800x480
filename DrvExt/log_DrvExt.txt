@@ -1,0 +1,5 @@
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/DispDevPanel/Disp_IFDSI_LCD1_TWJ50IP007_ILI9806E/../dispdev_IFdsi.c: In function 'dsi_LPWriteCmd':
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/DispDevPanel/Disp_IFDSI_LCD1_TWJ50IP007_ILI9806E/../dispdev_IFdsi.c:165: warning: "DISPDEV_IFDSI_TYPE" is not defined
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/DispDevPanel/Disp_IFDSI_LCD1_TWJ50IP007_ILI9806E/../dispdev_IFdsi.c:165: warning: "DISPDEV_IFDSI_NT35410" is not defined
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/DispDevPanel/Disp_IFDSI_LCD1_TWJ50IP007_ILI9806E/../dispdev_IFdsi.c:168: warning: "DISPDEV_IFDSI_TYPE" is not defined
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/DispDevPanel/Disp_IFDSI_LCD1_TWJ50IP007_ILI9806E/../dispdev_IFdsi.c:168: warning: "DISPDEV_IFDSI_NT35510" is not defined

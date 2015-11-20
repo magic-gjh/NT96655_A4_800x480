@@ -168,7 +168,7 @@ extern BOOL m_bACPlug;
 #define UPDATE_FILE2  "A:\\logo2.jpg"
 static BOOL bCarGuideLineMode  = FALSE;
 BOOL gbNeedToRecordMovie=FALSE;
-
+extern UINT8 g_Sensor2out;
 #if (_SENSORLIB2_ != _SENSORLIB2_DUMMY_)
 void UIFlowMovie_ReverseGearDet(void)
 {
@@ -346,7 +346,6 @@ INT32 UIFlowWndMovie_OnExeRecord(VControl *pCtrl, UINT32 paramNum, UINT32 *param
     UINT32 uiState;
     BOOL   CheckStorageErr = FALSE;
 
-
     // flush key event first
     Ux_FlushEventByRange(NVTEVT_KEY_EVT_START,NVTEVT_KEY_EVT_END);
 
@@ -374,13 +373,19 @@ INT32 UIFlowWndMovie_OnExeRecord(VControl *pCtrl, UINT32 paramNum, UINT32 *param
     }
 
     uiKeyAct = paramNum ? paramArray[0] : 0;
-
+	
     switch (uiKeyAct)
     {
     case NVTEVT_KEY_PRESS:
         switch (gMovData.State)
         {
         case MOV_ST_VIEW:
+
+			if(g_Sensor2out == 1)
+			{
+				g_Sensor2out = 0;
+				break;
+			}
             // return directly if dual display is on and 2nd display is HDMI
             // this cause is buffer limitation
             if (SysGetFlag(FL_DualDisp) == DUALDISP_ONBOTH&& IsDualHDMIPlugIn())
@@ -797,6 +802,7 @@ INT32 UIFlowWndMovie_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray
 	if(gbNeedToRecordMovie==TRUE)
     {
     	  gbNeedToRecordMovie=FALSE;
+		  
 	  	  Ux_PostEvent(NVTEVT_KEY_SHUTTER2, 1, NVTEVT_KEY_PRESS);
     }
     Ux_DefaultEvent(pCtrl,NVTEVT_OPEN_WINDOW,paramNum,paramArray);
@@ -1782,7 +1788,7 @@ inline static void  UIFlowWndMovie_UpdateSpeedData(void)
 INT32 UIFlowWndMovie_OnTimer(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 {
     UINT32  uiEvent;
-	
+
     uiEvent = paramNum ? paramArray[0] : 0;
 
     switch(uiEvent)

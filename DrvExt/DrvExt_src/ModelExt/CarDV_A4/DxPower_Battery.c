@@ -29,7 +29,7 @@
 #define VOLDET_BATTERY_365V         760//750
 #define VOLDET_BATTERY_360V         758//735
 #else
-#define VOLDET_BATTERY_420V         860//860//vincent@20150910-3
+#define VOLDET_BATTERY_420V         810//860//vincent@20150910-3
 #define VOLDET_BATTERY_385V         794//771
 #define VOLDET_BATTERY_365V         745//771
 #define VOLDET_BATTERY_360V         730//735

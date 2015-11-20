@@ -1163,18 +1163,18 @@ INT32 System_OnVideoAttach(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 #else
         debug_msg("--->LOGO Flag:%d..\r\n",SysGetFlag(FL_OPENING_LOGO));
 	  if(SysGetFlag(FL_OPENING_LOGO)==OPENING_LOGO_ON)
-        {
+      {
 	  	if(FALSE==UI_ShowLogoFile(UI_LOGO_POWERON,&uiJpgAddr,&uiJpgSize))
 	  	{
-   			SysSetFlag(FL_OPENING_LOGO,  OPENING_LOGO_OFF);	  	
-        		Display_ShowSplash(SPLASH_POWERON);		
+   		     SysSetFlag(FL_OPENING_LOGO,  OPENING_LOGO_OFF);	  	
+             Display_ShowSplash(SPLASH_POWERON);		
 		}
-        }
+      }
 	  else
 	  {
         	Display_ShowSplash(SPLASH_POWERON);
 	  }
-        Delay_DelayMs(30); // delay some time to avoid LCD flicker as power on
+        Delay_DelayMs(1000); // delay some time to avoid LCD flicker as power on
 #endif        
         //#NT#2015/01/21#KS Hung -begin
         //#NT#Fast boot recording.

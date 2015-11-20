@@ -80,7 +80,7 @@
 //@{
 /*Used in DSI*/
 const tPANEL_CMD tCmdModeDSI[] =
-#if 1
+#if 0
 {
 	{CMDDELAY_MS,   300},
     {DSICMD_CMD,    0xFF},   //page 1                                

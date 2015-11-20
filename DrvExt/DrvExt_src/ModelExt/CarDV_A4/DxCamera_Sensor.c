@@ -405,11 +405,36 @@ void DrvSensor_PowerSaveOn(void)
 {
 
 }
-
+#if 0
 BOOL DrvSensor_Det2ndSensor(void)
 {
     return (BOOL)!gpio_getPin(GPIO_SENSOR2_DET);
 }
+#else
+BOOL DrvSensor_Det2ndSensor(void)
+{
+	static BOOL flag = FALSE;
+	static UINT8 count = 0;
+	if(!gpio_getPin(GPIO_SENSOR2_DET))
+	{
+		count ++;
+		if(count > 1)
+		{
+			if(!gpio_getPin(GPIO_SENSOR2_DET))
+			{
+				flag = TRUE;
+				count = 0;
+			}
+		}
+	}
+	else
+	{
+		flag = FALSE;
+		count = 0;
+	}
+	return flag;
+}
+#endif
 
 #else
 void DrvSensor_TurnOnPower(void)

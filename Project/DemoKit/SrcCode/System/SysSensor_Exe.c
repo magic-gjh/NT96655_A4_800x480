@@ -54,7 +54,7 @@ extern BOOL gbNeedToRecordMovie;
 //void DscCommon_Open(void);
 void IPLCtrl_Open(void);
 void IPLCtrl_Close(void);
-
+UINT8 g_Sensor2out = 0;
 //void Sensor_RegCmdTab(void);
 
 void System_OnSensorInit(void)
@@ -176,7 +176,7 @@ void Sensor_DetExtSensor(void)
                 g_bDetExtSensor = TRUE;
 				if(SecondSensorflag == 1)
 				{
-					gbNeedToRecordMovie = TRUE;
+					//gbNeedToRecordMovie = TRUE;
 				}
 				else
 				{
@@ -185,8 +185,11 @@ void Sensor_DetExtSensor(void)
                 bDebounceCount = 0;
 
                 // re-enter movie mode
-#if 1//(_MODEL_DSC_ == _MODEL_DUAL_790S_)                
+#if 1//(_MODEL_DSC_ == _MODEL_DUAL_790S_) 
+			g_Sensor2out = 1;
+			Ux_PostEvent(NVTEVT_KEY_SHUTTER2, 1, NVTEVT_KEY_PRESS);
     		Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_CURR);
+			g_Sensor2out = 0;
 #else
                 Ux_PostEvent(NVTEVT_SYSTEM_MODE, 1, PRIMARY_MODE_MOVIE);
 #endif
@@ -208,10 +211,12 @@ void Sensor_DetExtSensor(void)
                 g_bDetExtSensor = FALSE;
                 bDebounceCount = 0;
 				SecondSensorflag = 0;
-
+			g_Sensor2out = 1;
+			Ux_PostEvent(NVTEVT_KEY_SHUTTER2, 1, NVTEVT_KEY_PRESS);
                 // re-enter movie mode
 #if 1//(_MODEL_DSC_ == _MODEL_DUAL_790S_)                
     		Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_CURR);
+			g_Sensor2out = 0;
 #else
                 Ux_PostEvent(NVTEVT_SYSTEM_MODE, 1, PRIMARY_MODE_MOVIE);
 #endif

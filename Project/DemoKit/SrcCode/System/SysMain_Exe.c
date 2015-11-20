@@ -43,7 +43,17 @@
 #define __DBGFLT__          "*" //*=All, [mark]=CustomClass
 #include "DebugModule.h"
 #include "UIConfig.h"
-
+#if 0
+#if(UI_RESOLUTION==UI_RESOLUTION_D800x480)
+#include "D800x480_DRIVER/UIResource/SoundData.h"
+#elif(UI_RESOLUTION==UI_RESOLUTION_D480x272)
+#include "D480x272_DRIVER/UIResource/SoundData.h"
+#elif(UI_RESOLUTION==UI_RESOLUTION_TOUCH_800x480)
+#include "TOUCH_800x480_DRIVER/UIResource/SoundData.h"
+#else
+#include "D320x240_DRIVER/UIResource/SoundData.h"
+#endif
+#endif
 ///////////////////////////////////////////////////////////////////////////////
 
 extern void GxSystem_BootStart(void);
@@ -252,7 +262,8 @@ INT32 System_OnBoot(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
         //#NT#2015/01/21#KS Hung -begin
         //#NT#Fast boot recording.
         #if (_FAST_BOOT_REC_FUNC_ == DISABLE)
-        UISound_Play(DEMOSOUND_SOUND_POWERON_TONE);
+        //UISound_Play(DEMOSOUND_SOUND_POWERON_TONE);
+        UISound_Play(4);
         #endif
         //#NT#2015/01/21#KS Hung -end
         //#NT#2012/10/23#Philex Lin-end
