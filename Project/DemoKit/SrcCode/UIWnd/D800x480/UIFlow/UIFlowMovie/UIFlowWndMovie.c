@@ -180,7 +180,20 @@ void UIFlowMovie_ReverseGearDet(void)
 	     
     if(GPIOMap_IsReverseGear()&&(bCarGuideLineMode == FALSE))
     //if(System_GetReverseGearFlag()&&(bCarGuideLineMode == FALSE))
-    {		
+    {	
+    	
+    	/*switch(gMovData.State)
+		{
+			case MOV_ST_VIEW:
+	      	case MOV_ST_VIEW|MOV_ST_ZOOM:
+				if (UI_GetData(FL_CardStatus) == CARD_INSERTED)
+				{
+					FlowMovie_StartRec();
+				}
+	       		break;
+			default:
+				break;
+		}*/
         uiLastPipViewStyle = PipView_GetStyle();
         //sensor change to sensor2 TV out
         debug_msg("-----------sensoer tv out-------\r\n");

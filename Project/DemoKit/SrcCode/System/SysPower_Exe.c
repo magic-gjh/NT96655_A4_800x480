@@ -746,23 +746,7 @@ void UI_DetGsensor(void)
     INT32 gsensor_trig;
     static UINT32 X,Y,Z;
     static UINT32 counter=0;
-#if 0
-	static UINT8 FristBootToSound = 0;
-	static UINT8 FristBootToSoundCount = 150;
 	
-	if(FristBootToSoundCount > 0)
-	{
-		FristBootToSoundCount--;
-		if(FristBootToSoundCount == 0)
-		{
-			if(FristBootToSound == 0)
-			{
-				FristBootToSound = 1;
-				GxSound_Stop();
-			}
-		}
-	}
-#endif	
     if(counter<5)
     {
 	GSensor_GetStatus(&GS_Data);
@@ -878,11 +862,18 @@ void System_DetReverseGear(void)
     UINT32          uiReverseGearCurSts;
     static BOOL bChangeMode=FALSE;
     static BOOL bFirstPowerOn=TRUE;
-	if(FlowMovie_GetFirstBootRecFlag() == TRUE)
+	static UINT8 count = 10;
+	if(count > 0)
+	{
+		count--;
+		return;
+	}
+	
+	/*if(FlowMovie_GetFirstBootRecFlag() == TRUE)
 	{
 		FlowMovie_SetFirstBootRecFlag(FALSE);
 		return;	
-	}
+	}*/
     if(GPIOMap_IsReverseGear())
     {
         uiReverseGearCurSts =  REVERSEGEAR_ON ;
