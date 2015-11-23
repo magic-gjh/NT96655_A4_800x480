@@ -79,6 +79,7 @@
 */
 //@{
 /*Used in DSI*/
+
 const tPANEL_CMD tCmdModeDSI[] =
 #if 0
 {
@@ -410,6 +411,7 @@ const tPANEL_CMD tCmdModeDSI[] =
 #else
 {
 
+	#if 0
     {DSICMD_CMD,    0xFF},   //page 1                                
     	{DSICMD_DATA,  0xFF}, //PA1                                              
     	{DSICMD_DATA,  0x98}, //PA2                                              
@@ -438,14 +440,14 @@ const tPANEL_CMD tCmdModeDSI[] =
     	{DSICMD_DATA,  0x05},//8a
 
     {DSICMD_CMD,    0x50},                                    
-    	{DSICMD_DATA,  0x65},//0x78}, //65 	
+    	{DSICMD_DATA,  0x68},//0x78}, //65 	
     {DSICMD_CMD,    0x51},                                   
-    	{DSICMD_DATA,  0x65},//0x78}, //65 
+    	{DSICMD_DATA,  0x68},//0x78}, //65 
 
     {DSICMD_CMD,    0x52},//54                                   
     	{DSICMD_DATA,  0x00},   
     {DSICMD_CMD,    0x53},//55                                   
-    	{DSICMD_DATA,  0x8c},   
+    	{DSICMD_DATA,  0x8a},   //0x8C
  	
     {DSICMD_CMD,    0x60},                                  
     	{DSICMD_DATA,  0x07},   	
@@ -739,6 +741,335 @@ const tPANEL_CMD tCmdModeDSI[] =
     {CMDDELAY_MS,   120},
     {DSICMD_CMD,    0x29},
     	//{DSICMD_DATA,   0x00},
+	#else
+	{DSICMD_CMD,    0xFF},   //page 1                                
+    	{DSICMD_DATA,  0xFF}, //PA1                                              
+    	{DSICMD_DATA,  0x98}, //PA2                                              
+    	{DSICMD_DATA,  0x06}, //PA3   
+    	{DSICMD_DATA,  0x04}, //PA3   
+    	{DSICMD_DATA,  0x01}, //PA3   
+    
+    {DSICMD_CMD,    0x08},                                     
+    	{DSICMD_DATA,  0x10}, 	
+    {DSICMD_CMD,    0x21},                                     
+    {	DSICMD_DATA,  0x01}, //PA1   	
+    {DSICMD_CMD,    0x30},                                   
+    	{DSICMD_DATA,  0x02}, //PA1 01  
+    {DSICMD_CMD,    0x31},                                      
+    	{DSICMD_DATA,  0x02}, //PA1   
+
+    {DSICMD_CMD,    0x40},                                    
+    	{DSICMD_DATA,  0x13},//16   
+    {DSICMD_CMD,    0x41},                                  
+    	{DSICMD_DATA,  0x24}, //22	
+    {DSICMD_CMD,    0x42},                                     
+    	{DSICMD_DATA,  0x02}, //01 	
+    {DSICMD_CMD,    0x43},                                     
+    	{DSICMD_DATA,  0x09},//0x02}, //84  	
+    {DSICMD_CMD,    0x44},                                    
+    	{DSICMD_DATA,  0x07},//8a
+
+    {DSICMD_CMD,    0x50},                                    
+    	{DSICMD_DATA,  0x78},//0x78}, //65 	
+    {DSICMD_CMD,    0x51},                                   
+    	{DSICMD_DATA,  0x78},//0x78}, //65 
+
+    {DSICMD_CMD,    0x52},//54                                   
+    	{DSICMD_DATA,  0x00},   
+    {DSICMD_CMD,    0x53},//55                                   
+    	{DSICMD_DATA,  0x87},   //0x8C
+ 	
+    {DSICMD_CMD,    0x60},                                  
+    	{DSICMD_DATA,  0x07},   	
+    {DSICMD_CMD,    0x61},                                  
+    	{DSICMD_DATA,  0x04}, 	
+    {DSICMD_CMD,    0x62},                                   
+    	{DSICMD_DATA,  0x08},	
+    {DSICMD_CMD,    0x63},                                  
+    	{DSICMD_DATA,  0x04}, 	
+    {DSICMD_CMD,    0xa0},                                  
+    	{DSICMD_DATA,  0x00},  	
+    {DSICMD_CMD,    0xa1},                                  
+    	{DSICMD_DATA,  0x09}, 	
+    {DSICMD_CMD,    0xa2},                              
+    	{DSICMD_DATA,  0x0f}, 
+    {DSICMD_CMD,    0xa3},                                 
+    	{DSICMD_DATA,  0x0c}, 	
+    {DSICMD_CMD,    0xa4},                                  
+    	{DSICMD_DATA,  0x05},    	
+    {DSICMD_CMD,    0xa5},                                  
+    	{DSICMD_DATA,  0x09}, 	
+    {DSICMD_CMD,    0xa6},                                  
+    	{DSICMD_DATA,  0x07}, 	
+    {DSICMD_CMD,    0xa7},                                  
+    	{DSICMD_DATA,  0x05}, 	
+    {DSICMD_CMD,    0xa8},                                  
+    	{DSICMD_DATA,  0x08}, 	
+    {DSICMD_CMD,    0xa9},                                  
+    	{DSICMD_DATA,  0x0b}, 	
+    {DSICMD_CMD,    0xaa},                                  
+    	{DSICMD_DATA,  0x11}, 	
+    {DSICMD_CMD,    0xab},                                  
+    	{DSICMD_DATA,  0x07}, 	
+    {DSICMD_CMD,    0xac},                                  
+    	{DSICMD_DATA,  0x0d}, 	
+    {DSICMD_CMD,    0xad},                                  
+    	{DSICMD_DATA,  0x12}, 		
+    {DSICMD_CMD,    0xae},                                  
+    	{DSICMD_DATA,  0x0a}, 		
+    {DSICMD_CMD,    0xaf},                                  
+    	{DSICMD_DATA,  0x00}, 		
+    {DSICMD_CMD,    0xc0},                                  
+    	{DSICMD_DATA,  0x00}, 		
+    {DSICMD_CMD,    0xc1},                                  
+    	{DSICMD_DATA,  0x09}, 		
+    {DSICMD_CMD,    0xc2},                                  
+    	{DSICMD_DATA,  0x0f}, 		
+    {DSICMD_CMD,    0xc3},                                  
+    	{DSICMD_DATA,  0x0c}, 		
+    {DSICMD_CMD,    0xc4},                                  
+    	{DSICMD_DATA,  0x05}, 		
+    {DSICMD_CMD,    0xc5},                                  
+    	{DSICMD_DATA,  0x08}, 		
+    {DSICMD_CMD,    0xc6},                                  
+    	{DSICMD_DATA,  0x07}, 		
+    {DSICMD_CMD,    0xc7},                                  
+    	{DSICMD_DATA,  0x04}, 		
+    {DSICMD_CMD,    0xc8},                                  
+    	{DSICMD_DATA,  0x08}, 		
+    {DSICMD_CMD,    0xc9},                                  
+    	{DSICMD_DATA,  0x0c}, 		
+    {DSICMD_CMD,    0xca},                                  
+    	{DSICMD_DATA,  0x11}, 		
+    {DSICMD_CMD,    0xcb},                                  
+    	{DSICMD_DATA,  0x08}, 		
+    {DSICMD_CMD,    0xcc},                                  
+    	{DSICMD_DATA,  0x0d}, 		
+    {DSICMD_CMD,    0xcd},                                  
+    	{DSICMD_DATA,  0x13}, 		
+    {DSICMD_CMD,    0xce},                                  
+    	{DSICMD_DATA,  0x0b}, 		
+    {DSICMD_CMD,    0xcf},                                  
+    	{DSICMD_DATA,  0x00}, 		
+    {CMDDELAY_MS,   20},
+/////////////////////////////////
+
+    {DSICMD_CMD,    0xFF},
+    {DSICMD_DATA,   0xFF},
+    {DSICMD_DATA,   0x98},
+    {DSICMD_DATA,   0x06},
+    {DSICMD_DATA,   0x04},
+    {DSICMD_DATA,   0x06},    // Change to Page 6
+    {CMDDELAY_MS,   10},
+
+    {DSICMD_CMD,    0x00},
+    	{DSICMD_DATA,   0x20},
+
+    {DSICMD_CMD,    0x01},
+    	{DSICMD_DATA,   0x04},  // VGL_REG ON   
+
+    {DSICMD_CMD,    0x02},
+   	 	{DSICMD_DATA,   0x00},  
+
+    {DSICMD_CMD,    0x03},
+    	{DSICMD_DATA,   0x08},  
+
+	{DSICMD_CMD,    0x04},
+   	 	{DSICMD_DATA,   0x01}, 
+   	 	
+   	 {DSICMD_CMD,    0x05},
+   	 	{DSICMD_DATA,   0x01}, 
+
+	{DSICMD_CMD,    0x06},
+   	 	{DSICMD_DATA,   0x80}, 
+
+	{DSICMD_CMD,    0x07},
+   	 	{DSICMD_DATA,   0x02}, 
+
+	{DSICMD_CMD,    0x08},
+   	 	{DSICMD_DATA,   0x05}, 
+
+	{DSICMD_CMD,    0x09},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x0a},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x0b},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x0c},
+   	 	{DSICMD_DATA,   0x01},
+
+	{DSICMD_CMD,    0x0d},
+   	 	{DSICMD_DATA,   0x01},
+
+	{DSICMD_CMD,    0x0e},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x0f},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x10},
+   	 	{DSICMD_DATA,   0xff}, 
+
+	{DSICMD_CMD,    0x11},
+   	 	{DSICMD_DATA,   0xf2}, 
+
+	{DSICMD_CMD,    0x12},
+   	 	{DSICMD_DATA,   0x01}, 
+
+	{DSICMD_CMD,    0x13},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x14},
+   	 	{DSICMD_DATA,   0x00},
+
+	{DSICMD_CMD,    0x15},
+   	 	{DSICMD_DATA,   0x43}, 
+
+	{DSICMD_CMD,    0x16},
+   	 	{DSICMD_DATA,   0x0b}, 
+
+	{DSICMD_CMD,    0x17},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x18},
+   	 	{DSICMD_DATA,   0x00},
+
+	{DSICMD_CMD,    0x19},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x1a},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x1b},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x1c},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x1d},
+   	 	{DSICMD_DATA,   0x00}, 
+
+	{DSICMD_CMD,    0x20},
+   	 	{DSICMD_DATA,   0x01}, 
+
+	{DSICMD_CMD,    0x21},
+   	 	{DSICMD_DATA,   0x23}, 
+
+	{DSICMD_CMD,    0x22},
+   	 	{DSICMD_DATA,   0x45}, 
+   	 	
+   	 {DSICMD_CMD,    0x23},
+   	 	{DSICMD_DATA,   0x67}, 
+
+	{DSICMD_CMD,    0x24},
+   	 	{DSICMD_DATA,   0x01}, 
+
+	{DSICMD_CMD,    0x25},
+   	 	{DSICMD_DATA,   0x23}, 
+
+	{DSICMD_CMD,    0x26},
+   	 	{DSICMD_DATA,   0x45},
+
+	{DSICMD_CMD,    0x27},
+   	 	{DSICMD_DATA,   0x67}, 
+
+	{DSICMD_CMD,    0x30},
+   	 	{DSICMD_DATA,   0x13}, 
+
+	{DSICMD_CMD,    0x31},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x32},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x33},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x34},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x35},
+   	 	{DSICMD_DATA,   0xbb}, 
+
+	{DSICMD_CMD,    0x36},
+   	 	{DSICMD_DATA,   0xaa}, 
+
+	{DSICMD_CMD,    0x37},
+   	 	{DSICMD_DATA,   0xdd},
+
+	{DSICMD_CMD,    0x38},
+   	 	{DSICMD_DATA,   0xcc},
+
+	{DSICMD_CMD,    0x39},
+   	 	{DSICMD_DATA,   0x22},
+
+	{DSICMD_CMD,    0x3a},
+   	 	{DSICMD_DATA,   0x66}, 
+
+	{DSICMD_CMD,    0x3b},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x3c},
+   	 	{DSICMD_DATA,   0x88}, 
+
+	{DSICMD_CMD,    0x3d},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x3e},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x3f},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x40},
+   	 	{DSICMD_DATA,   0x22}, 
+
+	{DSICMD_CMD,    0x52},
+   	 	{DSICMD_DATA,   0x10},
+
+	{DSICMD_CMD,    0x53},
+   	 	{DSICMD_DATA,   0x12}, 
+
+    {DSICMD_CMD,    0xff}, //page 7                                 
+    {DSICMD_DATA,  0xff}, 	
+    {DSICMD_DATA,    0x98},                                  
+    {DSICMD_DATA,  0x06}, 	   
+    {DSICMD_DATA,    0x04},                                  
+    {DSICMD_DATA,  0x07},
+
+	{DSICMD_CMD,    0x18},
+   	 	{DSICMD_DATA,   0x1d}, 
+
+	{DSICMD_CMD,    0x17},
+   	 	{DSICMD_DATA,   0x32}, 
+
+	{DSICMD_CMD,    0x02},
+   	 	{DSICMD_DATA,   0x77}, 
+
+	{DSICMD_CMD,    0xe1},
+   	 	{DSICMD_DATA,   0x79}, 
+
+	{DSICMD_CMD,    0x26},
+   	 	{DSICMD_DATA,   0xb2}, 
+   	 	
+	{DSICMD_CMD,    0xff}, //page 0                                 
+    {DSICMD_DATA,  0xff}, 	
+    {DSICMD_DATA,    0x98},                                  
+    {DSICMD_DATA,  0x06}, 	   
+    {DSICMD_DATA,    0x04},                                  
+    {DSICMD_DATA,  0x00},
+
+	{DSICMD_CMD,    0x36},
+   	 	{DSICMD_DATA,   0x02}, //RGB
+   	//{DSICMD_CMD,    0x3a},
+   	 	//{DSICMD_DATA,   0x77},
+   	{DSICMD_CMD,    0x29},
+    {DSICMD_CMD,    0x11},
+   	
+	#endif
 };
 #endif
 
