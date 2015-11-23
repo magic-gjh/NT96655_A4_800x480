@@ -26,8 +26,8 @@
 #define DATETIME_DEFAULT_SECOND    0
 
 /* (57, 53) is the parent's start (x,y). */
-#define DATETIME_START_X        84//57
-#define DATETIME_START_Y        94//53
+#define DATETIME_START_X        150//57
+#define DATETIME_START_Y        0//53
 
 #define DATETIME_SHIFT_X        20
 
@@ -98,11 +98,11 @@ static void UIMenuWndSetupDateTime_UpdateInfo(void)
     Ux_RECT rect1_3   = {470-DATETIME_START_X,  103-DATETIME_START_Y, 509-DATETIME_START_X, 117-DATETIME_START_Y};	
     #if (DATETIME_AMPM_ENABLE == ENABLE)
     /* rect2_x: HH:MI:SEC AM position */
-    Ux_RECT rect2_1   = {116-DATETIME_START_X-DATETIME_SHIFT_X, 104-DATETIME_START_Y, 155-DATETIME_START_X-DATETIME_SHIFT_X, 160-DATETIME_START_Y};
-    Ux_RECT rect2_2   = {152-DATETIME_START_X-DATETIME_SHIFT_X, 117-DATETIME_START_Y, 172-DATETIME_START_X-DATETIME_SHIFT_X, 146-DATETIME_START_Y};
-    Ux_RECT rect2_3   = {173-DATETIME_START_X-DATETIME_SHIFT_X, 104-DATETIME_START_Y, 212-DATETIME_START_X-DATETIME_SHIFT_X, 160-DATETIME_START_Y};
-    Ux_RECT rect2_4   = {208-DATETIME_START_X-DATETIME_SHIFT_X, 117-DATETIME_START_Y, 228-DATETIME_START_X-DATETIME_SHIFT_X, 146-DATETIME_START_Y};
-    Ux_RECT rect2_5   = {229-DATETIME_START_X-DATETIME_SHIFT_X, 104-DATETIME_START_Y, 268-DATETIME_START_X-DATETIME_SHIFT_X, 160-DATETIME_START_Y};
+    Ux_RECT rect2_1   = {348-DATETIME_START_X,  200-DATETIME_START_Y, 163-DATETIME_START_X, 230-DATETIME_START_Y};//hpur
+    Ux_RECT rect2_2   = {375-DATETIME_START_X,  220-DATETIME_START_Y, 163-DATETIME_START_X, 230-DATETIME_START_Y};//:
+    Ux_RECT rect2_3   = {409-DATETIME_START_X,  200-DATETIME_START_Y, 448-DATETIME_START_X, 230-DATETIME_START_Y};//min
+    Ux_RECT rect2_4   = {445-DATETIME_START_X,  220-DATETIME_START_Y, 163-DATETIME_START_X, 230-DATETIME_START_Y};//:
+    Ux_RECT rect2_5   = {470-DATETIME_START_X,  200-DATETIME_START_Y, 509-DATETIME_START_X, 230-DATETIME_START_Y};//sec	
     Ux_RECT rect2_6   = {268-DATETIME_START_X-DATETIME_SHIFT_X, 104-DATETIME_START_Y, 307-DATETIME_START_X-DATETIME_SHIFT_X, 160-DATETIME_START_Y};
     #endif
 
@@ -129,7 +129,7 @@ static void UIMenuWndSetupDateTime_UpdateInfo(void)
     #endif
     snprintf(itemMIN_Buf, 32, "%02ld", g_min);
     snprintf(itemSEC_Buf, 32, "%02ld", g_second);
-
+#if 0
     switch(SysGetFlag(FL_DATE_FORMAT))
     {
     case DATE_FORMAT_DMY:
@@ -160,7 +160,7 @@ static void UIMenuWndSetupDateTime_UpdateInfo(void)
         }
         break;
     }
-
+#endif
     #if (DATETIME_AMPM_ENABLE == ENABLE)
     UxCtrl_SetPos(&UIMenuWndSetupDateTime_YMD_HRCtrl,           rect2_1);
     UxCtrl_SetPos(&UIMenuWndSetupDateTime_YMD_VALUE_Other2Ctrl, rect2_2);
@@ -210,6 +210,8 @@ INT32 UIMenuWndSetupDateTime_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *pa
     #else
     UxCtrl_SetShow(&UIMenuWndSetupDateTime_YMD_AMPMCtrl, FALSE);
     #endif
+	UxCtrl_SetShow(&UIMenuWndSetupDateTime_YMD_SwitchCtrl, FALSE);
+	UxCtrl_SetShow(&UIMenuWndSetupDateTime_YMD_VALUE_Other4Ctrl, FALSE);
 
     UIMenuWndSetupDateTime_UpdateInfo();
     //#NT#2010/06/01#Chris Chung -end
@@ -489,7 +491,7 @@ INT32 UIMenuWndSetupDateTime_Tab_OnKeyRight(VControl *pCtrl, UINT32 paramNum, UI
     case DATE_FORMAT_YMD:
         switch(UxTab_GetData(&UIMenuWndSetupDateTime_TabCtrl, TAB_FOCUS))
         {
-        case UI_DATETIME_IDX_SWITCH:
+        case UI_DATETIME_IDX_SEC:
             UxTab_SetData(&UIMenuWndSetupDateTime_TabCtrl, TAB_FOCUS, UI_DATETIME_IDX_Y);
             break;
         default:
