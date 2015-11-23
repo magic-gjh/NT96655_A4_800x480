@@ -1818,6 +1818,8 @@ INT32 UIFlowWndMovie_OnTimer(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArra
     	     		Ux_PostEvent(NVTEVT_KEY_UP, 1, NVTEVT_KEY_PRESS);
 #else
     	     		Ux_PostEvent(NVTEVT_KEY_SHUTTER2, 1, NVTEVT_KEY_PRESS);
+					MediaRec_SetCrash();
+					FlowMovie_IconDrawLockFile();
 #endif
                     }
                  }
@@ -1837,8 +1839,8 @@ INT32 UIFlowWndMovie_OnTimer(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArra
                         // stop recording
                         if (FlowMovie_GetRecCurrTime() >= 1)
                         {
- 				  UIFlowWndMovie_SetGsensorTrigFlag(FALSE);    
- 		  		  FlowMovie_IconHideLockFile();	                        
+ 				  			UIFlowWndMovie_SetGsensorTrigFlag(FALSE);    
+ 		  		  			FlowMovie_IconHideLockFile();	                        
                             FlowMovie_StopRec();
                             if ( FALSE == AE_Wait_Stable(3, 60) )
                                 DBG_ERR("Motion Detection: AE do not stable\r\n");

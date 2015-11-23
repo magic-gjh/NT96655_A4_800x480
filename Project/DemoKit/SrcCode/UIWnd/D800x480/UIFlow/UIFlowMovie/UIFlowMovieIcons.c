@@ -457,7 +457,7 @@ void FlowMovie_UpdateIcons(BOOL bShow)
 				FlowMovie_IconHideEV();
 				FlowMovie_DrawPIM(FALSE);
 				FlowMovie_IconHideGsensor();
-				FlowMovie_IconHideLockFile();
+				//FlowMovie_IconHideLockFile();
 				FlowMovie_IconHideGPS();
 				FlowMovie_IconHideLED();
 				FlowMovie_IconHidePlateNumber();
@@ -467,7 +467,6 @@ void FlowMovie_UpdateIcons(BOOL bShow)
 			break;
 
 			default:
-				debug_msg("magic_20151113_not_rec\r\n");
 				FlowMovie_IconDrawDateTime();
     			FlowMovie_IconDrawBattery();
 				FlowMovie_IconDrawAudioOnOff();	
