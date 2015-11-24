@@ -13,12 +13,24 @@
 #define CARNO_1ST_CNT	31
 #define CARNO_1ST_IND	1
 #define CARNO_NOR_CNT	36
-
+#define CARNO_NOR_CHAR_CNT	26
+#define CARNO_NOR_NUM_CNT	10
+#define CarNoStrIsChar    0
+#define CarNoStrIsNum     1
+#define CarNoStrIsUnknown 2
+static UINT8 CarNoStrSel = CarNoStrIsUnknown;
+static UINT8 ModeKey_CarNoStrSel = 0;
 static CHAR CarNoBuf[CARNO_LEN+1] = {0};
 static CHAR CarNoShow[CARNO_LEN][2] = {"A", "8", "8", "8", "8", "8", "8"};
 _ALIGNED(4) const char  CarNoNormalStr[]   = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S',
                                                   'T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'};
+
+_ALIGNED(4) const char  CarNoNormalNumStr[]   = {'0','1','2','3','4','5','6','7','8','9'};
+_ALIGNED(4) const char  CarNoNormalCharStr[]   = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S',
+                                                  'T','U','V','W','X','Y','Z'};
 static int CarNoStrIndex[CARNO_LEN] = {0};	//  Button Control string index
+static int CarNoStrCharIndex;
+static int CarNoStrNumIndex;
 static UINT32 CarNo1stStrId[] =
 {
 	0,
@@ -54,6 +66,7 @@ static UINT32 CarNo1stStrId[] =
 	STRID_9655,		// 陕
 	STRID_9752		// 青
 };
+
 VControl *CarNoButton[UIMenuWndSetupCarNumber_Tab_MAX]=
 {
 	&UIMenuWndSetupCarNumber_Button1Ctrl,
@@ -101,6 +114,7 @@ INT32 UIMenuWndSetupCarNumber_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *p
 {
 	int i;
 	int j;
+	int z;
 	memset(CarNoBuf, 0, CARNO_LEN+1);
 	strncpy(CarNoBuf, SysGetZHCarNoStamp(), CARNO_LEN+1);
 	// Default Car no 京B00000
@@ -121,7 +135,7 @@ INT32 UIMenuWndSetupCarNumber_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *p
 		}
 		else
 		{
-			for (j=0; j<CARNO_NOR_CNT; j++)
+			/*for (j=0; j<CARNO_NOR_CNT; j++)
 			{
 				if (CarNoBuf[i] == CarNoNormalStr[j])
 				{
@@ -132,8 +146,46 @@ INT32 UIMenuWndSetupCarNumber_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *p
 			if (j >= CARNO_NOR_CNT)
 			{
 				CarNoStrIndex[i] = 0;
+			}*/
+
+			//判断是否为字符
+			for (j=0; j<CARNO_NOR_CHAR_CNT; j++)
+			{
+				if (CarNoBuf[i] == CarNoNormalCharStr[j])
+				{
+					CarNoStrIndex[i] = j;
+					CarNoStrSel  = CarNoStrIsChar;
+					break;
+				}
 			}
-			CarNoShow[i][0] = CarNoNormalStr[CarNoStrIndex[i]];
+			if (j >= CARNO_NOR_CHAR_CNT)
+			{
+				CarNoStrIndex[i] = 0;
+			}
+
+			//判断是否为数字
+			for (z=0; z<CARNO_NOR_NUM_CNT; z++)
+			{
+				if (CarNoBuf[i] == CarNoNormalNumStr[z])
+				{
+					CarNoStrIndex[i] = z;
+					CarNoStrSel  = CarNoStrIsNum;
+					break;
+				}
+			}
+			if (z >= CARNO_NOR_NUM_CNT)
+			{
+				CarNoStrIndex[i] = 0;
+			}
+
+			if(CarNoStrSel == CarNoStrIsChar)
+			{
+				CarNoShow[i][0] = CarNoNormalCharStr[CarNoStrIndex[i]];
+			}
+			else if(CarNoStrSel == CarNoStrIsNum)
+			{
+				CarNoShow[i][0] = CarNoNormalNumStr[CarNoStrIndex[i]];
+			}
 		}
 	}
 	
@@ -166,7 +218,7 @@ INT32 UIMenuWndSetupCarNumber_OnKeyEnter(VControl *pCtrl, UINT32 paramNum, UINT3
 }
 INT32 UIMenuWndSetupCarNumber_OnKeyMode(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 {
-	int i;
+	/*int i;
 
 	for (i=0; i<CARNO_LEN; i++)
 	{
@@ -175,7 +227,24 @@ INT32 UIMenuWndSetupCarNumber_OnKeyMode(VControl *pCtrl, UINT32 paramNum, UINT32
 	CarNoBuf[i] = '\0';
 	SysSetZHCarNoStamp(CarNoBuf);
 	
-	Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_NEXT);
+	Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_NEXT);*/
+	static UINT8 step = 0;
+	switch(step)
+	{
+		case 0:
+			ModeKey_CarNoStrSel = CarNoStrIsChar;
+			CarNoStrCharIndex = 25;
+			step = 1;
+			break;
+		case 1:
+			ModeKey_CarNoStrSel = CarNoStrIsNum;
+			CarNoStrNumIndex = 9;
+			step = 0;
+			break;
+		default:
+			break;
+	}
+	debug_msg("ModeKey_CarNoStrSel = %d\r\n",ModeKey_CarNoStrSel);
     return NVTEVT_CONSUME;
 }
 //----------------------UIMenuWndSetupCarNumber_TabCtrl Event---------------------------
@@ -204,16 +273,40 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 		}
 		else if (CarNoStrIndex[CurTabIndex] == 0 && CurTabIndex != 0)
 		{
-			CarNoStrIndex[CurTabIndex] = CARNO_NOR_CNT-1;
+			//CarNoStrIndex[CurTabIndex] = CARNO_NOR_CNT-1;
+			if(ModeKey_CarNoStrSel == CarNoStrIsChar)
+			{
+				CarNoStrCharIndex = CARNO_NOR_CHAR_CNT-1;
+				CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
+				debug_msg("up: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
+			}
+			else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
+			{
+				CarNoStrNumIndex = CARNO_NOR_NUM_CNT-1;
+				CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
+				debug_msg("up: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
+			}
 		}
 		else
 		{
-			CarNoStrIndex[CurTabIndex]--;
+			if(ModeKey_CarNoStrSel == CarNoStrIsChar)
+			{
+				CarNoStrCharIndex--;
+				CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
+				debug_msg("up: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
+			}
+			else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
+			{
+				CarNoStrNumIndex--;	
+				CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
+				debug_msg("up: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
+			}
 		}
 	}
 	else // down
 	{
-		if (CarNoStrIndex[CurTabIndex] == CARNO_1ST_CNT && CurTabIndex == 0)
+	
+		/*if (CarNoStrIndex[CurTabIndex] == CARNO_1ST_CNT && CurTabIndex == 0)
 		{
 			CarNoStrIndex[CurTabIndex] = 1;
 		}
@@ -224,6 +317,41 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 		else
 		{
 			CarNoStrIndex[CurTabIndex]++;
+		}*/
+
+		if (CarNoStrIndex[CurTabIndex] == CARNO_1ST_CNT && CurTabIndex == 0)
+		{
+			CarNoStrIndex[CurTabIndex] = 1;
+		}
+		else if (CurTabIndex != 0)
+		{
+			if( (ModeKey_CarNoStrSel == CarNoStrIsChar) && (CarNoStrIndex[CurTabIndex] == CARNO_NOR_CHAR_CNT-1) )
+			{
+				CarNoStrCharIndex = 0;
+				CarNoStrIndex[CurTabIndex] = 0;
+				debug_msg("dowm: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
+			}
+			else if( (ModeKey_CarNoStrSel == CarNoStrIsNum) && (CarNoStrIndex[CurTabIndex] == CARNO_NOR_NUM_CNT-1))
+			{
+				CarNoStrNumIndex = 0;
+				CarNoStrIndex[CurTabIndex] = 0;
+				debug_msg("dowm: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
+			}
+			else
+			{
+				if(ModeKey_CarNoStrSel == CarNoStrIsChar)
+				{
+					CarNoStrCharIndex++;
+					CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
+					debug_msg("dowm: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
+				}
+				else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
+				{
+					CarNoStrNumIndex++;	
+					CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
+					debug_msg("dowm: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
+				}
+			}
 		}
 	}
 	
@@ -234,7 +362,16 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 	}
 	else
 	{
-		CarNoShow[CurTabIndex][0] = CarNoNormalStr[CarNoStrIndex[CurTabIndex]];
+		//CarNoShow[CurTabIndex][0] = CarNoNormalStr[CarNoStrIndex[CurTabIndex]];
+		if(ModeKey_CarNoStrSel == CarNoStrIsChar)
+		{
+			CarNoShow[CurTabIndex][0] = CarNoNormalCharStr[CarNoStrIndex[CurTabIndex]];	
+		}
+		else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
+		{
+			CarNoShow[CurTabIndex][0] = CarNoNormalNumStr[CarNoStrIndex[CurTabIndex]];		
+		}
+			
 		UxButton_SetItemData(CarNoButton[CurTabIndex], 0, BTNITM_STRID, Txt_Pointer(CarNoShow[CurTabIndex]));
 		
 	}
