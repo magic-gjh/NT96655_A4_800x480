@@ -265,6 +265,7 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 {
 	UINT32 CurTabIndex = 0;
 	CurTabIndex = UxTab_GetData(pCtrl, TAB_FOCUS);
+	debug_msg("CarNoStrIndex[CurTabIndex] = %d,CurTabIndex = %d\r\n",CarNoStrIndex[CurTabIndex],CurTabIndex);
 	if (derc == -1)//up
 	{
 		if (CarNoStrIndex[CurTabIndex] <= 1 && CurTabIndex == 0)
@@ -289,17 +290,25 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 		}
 		else
 		{
-			if(ModeKey_CarNoStrSel == CarNoStrIsChar)
+
+			if(CurTabIndex == 0)
 			{
-				CarNoStrCharIndex--;
-				CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
-				debug_msg("up: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
+				CarNoStrIndex[CurTabIndex]--;	
 			}
-			else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
+			else
 			{
-				CarNoStrNumIndex--;	
-				CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
-				debug_msg("up: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
+				if(ModeKey_CarNoStrSel == CarNoStrIsChar)
+				{
+					CarNoStrCharIndex--;
+					CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
+					debug_msg("up: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
+				}
+				else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
+				{
+					CarNoStrNumIndex--;	
+					CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
+					debug_msg("up: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
+				}
 			}
 		}
 	}
@@ -338,7 +347,7 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 				debug_msg("dowm: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
 			}
 			else
-			{
+			{	
 				if(ModeKey_CarNoStrSel == CarNoStrIsChar)
 				{
 					CarNoStrCharIndex++;
@@ -352,6 +361,10 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 					debug_msg("dowm: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
 				}
 			}
+		}
+		else if(CurTabIndex == 0)
+		{
+			CarNoStrIndex[CurTabIndex]++;	
 		}
 	}
 	
