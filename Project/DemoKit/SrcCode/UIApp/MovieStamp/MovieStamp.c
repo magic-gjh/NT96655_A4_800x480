@@ -1241,9 +1241,9 @@ void MovieStamp_CopyData(UINT32 uiVidEncId, UINT32 yAddr, UINT32 cbAddr, UINT32 
         }
 
         ////<< spark add AE function
-#if(_MODEL_DSC_ == _MODEL_CARDV_K12_)        
+
         //IQS_GetLogString(&g_cMovieStampStr[uiVidEncId][0], 256);//vincent@20150818-3
-#endif
+
         #if (CHECK_ENC_INFO == ENABLE)
         {
             UINT32 uiParam[7];
