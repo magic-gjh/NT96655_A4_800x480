@@ -18,6 +18,7 @@ UIMenuWndSetupCarNumber_Tab_UIMenuWndSetupCarNumber_Button4,
 UIMenuWndSetupCarNumber_Tab_UIMenuWndSetupCarNumber_Button5,
 UIMenuWndSetupCarNumber_Tab_UIMenuWndSetupCarNumber_Button6,
 UIMenuWndSetupCarNumber_Tab_UIMenuWndSetupCarNumber_Button7,
+UIMenuWndSetupCarNumber_Tab_UIMenuWndSetupCarNumber_InputType,
 UIMenuWndSetupCarNumber_Tab_MAX
 }UIMenuWndSetupCarNumber_Tab_Setting;
 
@@ -34,6 +35,15 @@ extern VControl UIMenuWndSetupCarNumber_Button5Ctrl;//Button type
 extern VControl UIMenuWndSetupCarNumber_Button6Ctrl;//Button type 
 
 extern VControl UIMenuWndSetupCarNumber_Button7Ctrl;//Button type 
+
+extern VControl UIMenuWndSetupCarNumber_InputTypeCtrl;//Status type 
+
+typedef enum
+{
+UIMenuWndSetupCarNumber_InputType_ICON_ABC,
+UIMenuWndSetupCarNumber_InputType_ICON_CAR_NUM,
+UIMenuWndSetupCarNumber_InputType_MAX
+}UIMenuWndSetupCarNumber_InputType_Setting;
 
 //---------------------UIMenuWndSetupCarNumberCtrl User Export---------------------------
 #endif

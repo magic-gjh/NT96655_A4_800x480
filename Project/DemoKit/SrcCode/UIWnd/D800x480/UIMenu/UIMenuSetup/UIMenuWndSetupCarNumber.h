@@ -35,5 +35,14 @@ extern VControl UIMenuWndSetupCarNumber_Button6Ctrl;//Button type
 
 extern VControl UIMenuWndSetupCarNumber_Button7Ctrl;//Button type 
 
+extern VControl UIMenuWndSetupCarNumber_InputTypeCtrl;//Status type 
+
+typedef enum
+{
+UIMenuWndSetupCarNumber_InputType_ICON_ABC,
+UIMenuWndSetupCarNumber_InputType_ICON_CAR_NUM,
+UIMenuWndSetupCarNumber_InputType_MAX
+}UIMenuWndSetupCarNumber_InputType_Setting;
+
 //---------------------UIMenuWndSetupCarNumberCtrl User Export---------------------------
 #endif

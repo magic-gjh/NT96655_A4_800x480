@@ -77,6 +77,16 @@ VControl *CarNoButton[UIMenuWndSetupCarNumber_Tab_MAX]=
 	&UIMenuWndSetupCarNumber_Button6Ctrl,
 	&UIMenuWndSetupCarNumber_Button7Ctrl,
 };
+
+typedef enum {
+    UI_CARNUMBER_Button1,
+    UI_CARNUMBER_Button2,
+    UI_CARNUMBER_Button3,
+    UI_CARNUMBER_Button4,
+    UI_CARNUMBER_Button5,
+    UI_CARNUMBER_Button6,
+    UI_CARNUMBER_Button7,
+} _UI_CARNUMBER_IDX_;
 //---------------------UIMenuWndSetupCarNumberCtrl Control List---------------------------
 CTRL_LIST_BEGIN(UIMenuWndSetupCarNumber)
 CTRL_LIST_ITEM(UIMenuWndSetupCarNumber_Tab)
@@ -115,6 +125,7 @@ INT32 UIMenuWndSetupCarNumber_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *p
 	int i;
 	int j;
 	int z;
+	ModeKey_CarNoStrSel = 0;
 	memset(CarNoBuf, 0, CARNO_LEN+1);
 	strncpy(CarNoBuf, SysGetZHCarNoStamp(), CARNO_LEN+1);
 	// Default Car no ¾©B00000
@@ -191,6 +202,10 @@ INT32 UIMenuWndSetupCarNumber_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *p
 	
 	UIMenuWndSetupCarNumber_UpdateInfo();
 	UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, 0);
+	
+	UxState_SetData(&UIMenuWndSetupCarNumber_InputTypeCtrl,STATE_CURITEM,ModeKey_CarNoStrSel);
+    UxCtrl_SetShow(&UIMenuWndSetupCarNumber_InputTypeCtrl, TRUE);
+	
     Ux_DefaultEvent(pCtrl,NVTEVT_OPEN_WINDOW,paramNum,paramArray);
     return NVTEVT_CONSUME;
 }
@@ -228,23 +243,20 @@ INT32 UIMenuWndSetupCarNumber_OnKeyMode(VControl *pCtrl, UINT32 paramNum, UINT32
 	SysSetZHCarNoStamp(CarNoBuf);
 	
 	Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_NEXT);*/
-	static UINT8 step = 0;
-	switch(step)
+
+	if(ModeKey_CarNoStrSel == 0)
 	{
-		case 0:
-			ModeKey_CarNoStrSel = CarNoStrIsChar;
-			CarNoStrCharIndex = 25;
-			step = 1;
-			break;
-		case 1:
-			ModeKey_CarNoStrSel = CarNoStrIsNum;
-			CarNoStrNumIndex = 9;
-			step = 0;
-			break;
-		default:
-			break;
+		ModeKey_CarNoStrSel = CarNoStrIsNum;
+		CarNoStrNumIndex = 9;	
 	}
-	debug_msg("ModeKey_CarNoStrSel = %d\r\n",ModeKey_CarNoStrSel);
+	else
+	{
+		ModeKey_CarNoStrSel = CarNoStrIsChar;
+		CarNoStrCharIndex = 25;
+	}
+	
+	UxState_SetData(&UIMenuWndSetupCarNumber_InputTypeCtrl,STATE_CURITEM,ModeKey_CarNoStrSel);
+    UxCtrl_SetShow(&UIMenuWndSetupCarNumber_InputTypeCtrl, TRUE);
     return NVTEVT_CONSUME;
 }
 //----------------------UIMenuWndSetupCarNumber_TabCtrl Event---------------------------
@@ -265,27 +277,24 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 {
 	UINT32 CurTabIndex = 0;
 	CurTabIndex = UxTab_GetData(pCtrl, TAB_FOCUS);
-	debug_msg("CarNoStrIndex[CurTabIndex] = %d,CurTabIndex = %d\r\n",CarNoStrIndex[CurTabIndex],CurTabIndex);
-	if (derc == -1)//up
+	if (derc == -1)//down
 	{
 		if (CarNoStrIndex[CurTabIndex] <= 1 && CurTabIndex == 0)
 		{
-			CarNoStrIndex[CurTabIndex] = CARNO_1ST_CNT;
+			CarNoStrIndex[CurTabIndex] = 31;
 		}
-		else if (CarNoStrIndex[CurTabIndex] == 0 && CurTabIndex != 0)
+		else if (CarNoStrIndex[CurTabIndex] <= 0 && CurTabIndex != 0)
 		{
 			//CarNoStrIndex[CurTabIndex] = CARNO_NOR_CNT-1;
 			if(ModeKey_CarNoStrSel == CarNoStrIsChar)
 			{
-				CarNoStrCharIndex = CARNO_NOR_CHAR_CNT-1;
+				CarNoStrCharIndex = 25;
 				CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
-				debug_msg("up: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
 			}
 			else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
 			{
-				CarNoStrNumIndex = CARNO_NOR_NUM_CNT-1;
+				CarNoStrNumIndex = 9;
 				CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
-				debug_msg("up: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
 			}
 		}
 		else
@@ -301,64 +310,52 @@ static void _update_Tab_Button_index(VControl *pCtrl, int derc)
 				{
 					CarNoStrCharIndex--;
 					CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
-					debug_msg("up: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
 				}
 				else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
 				{
 					CarNoStrNumIndex--;	
 					CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
-					debug_msg("up: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
 				}
 			}
 		}
 	}
-	else // down
+	else // up
 	{
-	
-		/*if (CarNoStrIndex[CurTabIndex] == CARNO_1ST_CNT && CurTabIndex == 0)
-		{
-			CarNoStrIndex[CurTabIndex] = 1;
-		}
-		else if (CarNoStrIndex[CurTabIndex] == CARNO_NOR_CNT-1 && CurTabIndex != 0)
-		{
-			CarNoStrIndex[CurTabIndex] = 0;
-		}
-		else
-		{
-			CarNoStrIndex[CurTabIndex]++;
-		}*/
-
 		if (CarNoStrIndex[CurTabIndex] == CARNO_1ST_CNT && CurTabIndex == 0)
 		{
 			CarNoStrIndex[CurTabIndex] = 1;
 		}
 		else if (CurTabIndex != 0)
 		{
-			if( (ModeKey_CarNoStrSel == CarNoStrIsChar) && (CarNoStrIndex[CurTabIndex] == CARNO_NOR_CHAR_CNT-1) )
+			if( (ModeKey_CarNoStrSel == CarNoStrIsChar) && (CarNoStrIndex[CurTabIndex] >= CARNO_NOR_CHAR_CNT-1) )
 			{
 				CarNoStrCharIndex = 0;
 				CarNoStrIndex[CurTabIndex] = 0;
-				debug_msg("dowm: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
 			}
-			else if( (ModeKey_CarNoStrSel == CarNoStrIsNum) && (CarNoStrIndex[CurTabIndex] == CARNO_NOR_NUM_CNT-1))
+			else if( (ModeKey_CarNoStrSel == CarNoStrIsNum) && (CarNoStrIndex[CurTabIndex] >= CARNO_NOR_NUM_CNT-1))
 			{
 				CarNoStrNumIndex = 0;
 				CarNoStrIndex[CurTabIndex] = 0;
-				debug_msg("dowm: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
 			}
 			else
 			{	
 				if(ModeKey_CarNoStrSel == CarNoStrIsChar)
 				{
 					CarNoStrCharIndex++;
+					if(CarNoStrCharIndex > 25)
+					{
+						CarNoStrCharIndex = 25;
+					}
 					CarNoStrIndex[CurTabIndex] = CarNoStrCharIndex;
-					debug_msg("dowm: CarNoStrCharIndex = %d\r\n",CarNoStrCharIndex);
 				}
 				else if(ModeKey_CarNoStrSel == CarNoStrIsNum)
-				{
-					CarNoStrNumIndex++;	
+				{					
+					CarNoStrNumIndex++;
+					if(CarNoStrNumIndex > 9)
+					{
+						CarNoStrNumIndex = 9;	
+					}
 					CarNoStrIndex[CurTabIndex] = CarNoStrNumIndex;
-					debug_msg("dowm: CarNoStrNumIndex = %d\r\n",CarNoStrNumIndex);
 				}
 			}
 		}
@@ -396,7 +393,7 @@ INT32 UIMenuWndSetupCarNumber_Tab_OnKeyUp(VControl *pCtrl, UINT32 paramNum, UINT
 	{
 		case NVTEVT_KEY_PRESS:
 		{
-			_update_Tab_Button_index(pCtrl, -1);
+			_update_Tab_Button_index(pCtrl, 1);
 			break;
 		}
 	}
@@ -409,7 +406,7 @@ INT32 UIMenuWndSetupCarNumber_Tab_OnKeyDown(VControl *pCtrl, UINT32 paramNum, UI
 	{
 		case NVTEVT_KEY_PRESS:
 		{
-			_update_Tab_Button_index(pCtrl, 1);
+			_update_Tab_Button_index(pCtrl, -1);
 			break;
 		}
 	}
@@ -422,7 +419,43 @@ INT32 UIMenuWndSetupCarNumber_Tab_OnKeyLeft(VControl *pCtrl, UINT32 paramNum, UI
 }
 INT32 UIMenuWndSetupCarNumber_Tab_OnKeyRight(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 {
-	Ux_SendEvent(pCtrl,NVTEVT_NEXT_ITEM,0);
+	#if 1
+	if(UxTab_GetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS) == UI_CARNUMBER_Button7)
+	{
+		UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button1);
+	}
+	else
+	{
+		Ux_SendEvent(pCtrl,NVTEVT_NEXT_ITEM,0);
+	}
+	#else
+	switch(UxTab_GetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS))
+       {
+        case UI_CARNUMBER_Button1:
+            UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button2);
+            break;
+        case UI_CARNUMBER_Button2:
+            UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button3);
+            break;
+        case UI_CARNUMBER_Button3:
+            UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button4);
+            break;
+        case UI_CARNUMBER_Button4:
+            UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button5);
+            break;
+		case UI_CARNUMBER_Button5:
+            UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button6);
+            break;
+		case UI_CARNUMBER_Button6:
+            UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button7);
+            break;
+		case UI_CARNUMBER_Button7:
+            UxTab_SetData(&UIMenuWndSetupCarNumber_TabCtrl, TAB_FOCUS, UI_CARNUMBER_Button1);
+            break;
+        default:
+            Ux_SendEvent(pCtrl,NVTEVT_NEXT_ITEM,0);
+      }
+	#endif
     return NVTEVT_CONSUME;
 }
 INT32 UIMenuWndSetupCarNumber_Tab_OnKeyMenu(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
@@ -456,5 +489,9 @@ EVENT_END
 
 //----------------------UIMenuWndSetupCarNumber_Button7Ctrl Event---------------------------
 EVENT_BEGIN(UIMenuWndSetupCarNumber_Button7)
+EVENT_END
+
+//----------------------UIMenuWndSetupCarNumber_InputTypeCtrl Event---------------------------
+EVENT_BEGIN(UIMenuWndSetupCarNumber_InputType)
 EVENT_END
 

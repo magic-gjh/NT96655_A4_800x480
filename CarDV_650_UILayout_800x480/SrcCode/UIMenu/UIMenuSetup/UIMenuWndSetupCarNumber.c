@@ -112,3 +112,7 @@ EVENT_END
 EVENT_BEGIN(UIMenuWndSetupCarNumber_Button7)
 EVENT_END
 
+//----------------------UIMenuWndSetupCarNumber_InputTypeCtrl Event---------------------------
+EVENT_BEGIN(UIMenuWndSetupCarNumber_InputType)
+EVENT_END
+
