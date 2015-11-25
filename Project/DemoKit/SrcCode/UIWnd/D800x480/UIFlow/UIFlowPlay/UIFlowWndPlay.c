@@ -96,7 +96,6 @@ INT32 UIFlowWndPlay_OnMovieOneSec(VControl *, UINT32, UINT32 *);
 INT32 UIFlowWndPlay_OnStorageInit(VControl *, UINT32, UINT32 *);
 INT32 UIFlowWndPlay_OnStorageChange(VControl *, UINT32, UINT32 *);
 INT32 UIFlowWndPlay_OnKeyCustome1(VControl *, UINT32, UINT32 *);
-
 EVENT_BEGIN(UIFlowWndPlay)
 EVENT_ITEM(NVTEVT_OPEN_WINDOW,UIFlowWndPlay_OnOpen)
 EVENT_ITEM(NVTEVT_CLOSE_WINDOW,UIFlowWndPlay_OnClose)
@@ -274,6 +273,8 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
     Input_SetKeyMask(KEY_PRESS, PLAY_KEY_PRESS_MASK);
     Input_SetKeyMask(KEY_RELEASE, PLAY_KEY_RELEASE_MASK);
     Input_SetKeyMask(KEY_CONTINUE, PLAY_KEY_CONTINUE_MASK);
+	
+	System_Set_CurMode_Option_State(2);
 	
 	//UIFlowWndPlay_OnExeDownKeyAct(pCtrl, paramNum, paramArray);
 	if(app_check_playthumb_to_play() == 0)

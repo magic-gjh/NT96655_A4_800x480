@@ -93,7 +93,6 @@ INT32 UIFlowWndPhoto_OnFocusEnd(VControl *, UINT32, UINT32 *);
 //INT32 UIFlowWndPhoto_OnFdEnd(VControl *, UINT32, UINT32 *);
 //INT32 UIFlowWndPhoto_OnSdEnd(VControl *, UINT32, UINT32 *);
 INT32 UIFlowWndPhoto_OnCustom1(VControl *, UINT32, UINT32 *);
-
 EVENT_BEGIN(UIFlowWndPhoto)
 EVENT_ITEM(NVTEVT_OPEN_WINDOW,UIFlowWndPhoto_OnOpen)
 EVENT_ITEM(NVTEVT_CLOSE_WINDOW,UIFlowWndPhoto_OnClose)
@@ -482,6 +481,7 @@ INT32 UIFlowWndPhoto_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray
         Ux_PostEvent(NVTEVT_KEY_SHUTTER2, 1, NVTEVT_KEY_PRESS);
     }
 #endif
+	System_Set_CurMode_Option_State(1);
     Ux_DefaultEvent(pCtrl,NVTEVT_OPEN_WINDOW,paramNum,paramArray);
     return NVTEVT_CONSUME;
 }
@@ -512,6 +512,7 @@ INT32 UIFlowWndPhoto_OnClose(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArra
 
     /* Reset key press/release/continue mask to default */
     Ux_FlushEventByRange(NVTEVT_KEY_EVT_START,NVTEVT_KEY_EVT_END);
+
 
     Ux_DefaultEvent(pCtrl,NVTEVT_CLOSE_WINDOW,paramNum,paramArray);
     return NVTEVT_CONSUME;

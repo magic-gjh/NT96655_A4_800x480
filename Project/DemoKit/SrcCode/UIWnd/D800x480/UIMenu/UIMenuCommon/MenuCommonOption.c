@@ -30,7 +30,6 @@ EVENT_ITEM(NVTEVT_KEY_MODE,MenuCommonOption_OnKeyMode)
 EVENT_END
 
 //extern void MenuCommon_CalcPageInfo(VControl *pCtrl);
-
 void MenuCommonOption_UpdateContent(TM_MENU* pMenu)
 {
     UINT32      i;
@@ -72,10 +71,31 @@ INT32 MenuCommonOption_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArr
 
     pPage = &pMenu->pPages[pMenu->SelPage];
     pItem = &pPage->pItems[pPage->SelItem];
-
     MenuCommonOption_UpdateContent(pMenu);
+	
+	if(pItem->ItemId == IDM_SETUP_MODE)
+	{
+		switch(System_Get_CurMode_Option_State())
+		{
+			case SETUP_MODE_MOVIE:
+				SysSetFlag(pItem->SysFlag,SETUP_MODE_MOVIE);
+				break;
+				
+			case SETUP_MODE_PHOTO:
+				SysSetFlag(pItem->SysFlag,SETUP_MODE_PHOTO);
+				break;
+				
+			case SETUP_MODE_PLAY:
+				SysSetFlag(pItem->SysFlag,SETUP_MODE_PLAY);
+				break;
+				
+			default:
+				/* do nothing */
+				break;
+		}
+	}
+	
     UxMenu_SetData(&MenuCommonOption_MenuCtrl, MNU_CURITM, SysGetFlag(pItem->SysFlag));
-
     Ux_DefaultEvent(pCtrl,NVTEVT_OPEN_WINDOW,paramNum,paramArray);
     return NVTEVT_CONSUME;
 }
@@ -155,7 +175,7 @@ INT32 MenuCommonOption_Menu_OnKeyEnter(VControl *pCtrl, UINT32 paramNum, UINT32 
 
     // Close current UI Window now
     Ux_CloseWindow(&MenuCommonOptionCtrl, 2,pItem->ItemId,uiSelOption);
-
+	debug_msg("magic pItem->ItemId = %d,uiSelOption = %d \r\n",pItem->ItemId,uiSelOption);
     // notify upper layer the Option had been confirmed
     TM_MENU_CALLBACK(pMenu, TMM_CONFIRM_OPTION, MAKE_LONG(pItem->ItemId, uiSelOption));
 

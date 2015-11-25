@@ -94,7 +94,6 @@ INT32 UIFlowWndMovie_OnACPlug(VControl *, UINT32, UINT32 *);
 INT32 UIFlowWndMovie_OnACUnplug(VControl *, UINT32, UINT32 *);
 INT32 UIFlowWndMovie_OnCustom1(VControl *, UINT32, UINT32 *);
 INT32 UIFlowWndMovie_GsensorTrig(VControl *, UINT32, UINT32 *);
-
 EVENT_BEGIN(UIFlowWndMovie)
 EVENT_ITEM(NVTEVT_OPEN_WINDOW,UIFlowWndMovie_OnOpen)
 EVENT_ITEM(NVTEVT_CLOSE_WINDOW,UIFlowWndMovie_OnClose)
@@ -818,6 +817,7 @@ INT32 UIFlowWndMovie_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray
 		  
 	  	  Ux_PostEvent(NVTEVT_KEY_SHUTTER2, 1, NVTEVT_KEY_PRESS);
     }
+	System_Set_CurMode_Option_State(0);
     Ux_DefaultEvent(pCtrl,NVTEVT_OPEN_WINDOW,paramNum,paramArray);
     return NVTEVT_CONSUME;
 }

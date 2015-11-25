@@ -42,7 +42,7 @@ extern INT32 g_iSysCurMode;
 extern INT32 g_iSysPrevMode;
 extern INT32 g_iSysNextMode;
 extern INT32 g_iSysSleepLevel;
-
+static INT32 g_iSysCurMode_Option;
 INT32 System_GetState(INT32 state)
 {
     INT32 rvalue = 0;
@@ -98,3 +98,13 @@ void System_ChangeDMASpeed(int speed_id)
     DxSys_ChangeDMASpeed(speed_id);
 }
 
+
+INT32 System_Get_CurMode_Option_State(void)
+{
+	return g_iSysCurMode_Option;	
+}
+
+void System_Set_CurMode_Option_State(INT32 val)
+{
+	g_iSysCurMode_Option = val;
+}
