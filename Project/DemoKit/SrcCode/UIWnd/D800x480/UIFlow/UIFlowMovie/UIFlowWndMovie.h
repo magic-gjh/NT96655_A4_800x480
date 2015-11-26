@@ -91,7 +91,7 @@ extern VControl UIFlowWndMovie_Status_HDRCtrl;//Status type
 typedef enum
 {
 UIFlowWndMovie_Status_HDR_ICONID_NULL,
-UIFlowWndMovie_Status_HDR_ICON_HDR,
+UIFlowWndMovie_Status_HDR_ICON_WDR,
 UIFlowWndMovie_Status_HDR_MAX
 }UIFlowWndMovie_Status_HDR_Setting;
 

@@ -242,7 +242,7 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
     Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYINIT,0);
     //After playback ready, point to the last file
 
-//    PB_OpenSpecFileBySeq(DCF_GetDBInfo(DCF_INFO_TOL_FILE_COUNT), TRUE);
+    //PB_OpenSpecFileBySeq(DCF_GetDBInfo(DCF_INFO_TOL_FILE_COUNT), TRUE);
     PB_OpenSpecFileBySeq(AppPlay_GetData(PLAY_FILENUM), TRUE);
 
     Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYSINGLE, 2, PB_SINGLE_CURR, 1);
@@ -324,6 +324,8 @@ INT32 UIFlowWndPlay_OnClose(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray
     // enable auto power off/USB detect timer
     // enable sound key tone
     KeyScan_EnableMisc(TRUE);
+
+	app_reset_playthumb_to_play();
     //#NT#2012/10/23#Philex Lin - end
     //g_PlbData.VideoPBSpeed=PLB_FWD_MOV_1x;
     Ux_DefaultEvent(pCtrl,NVTEVT_CLOSE_WINDOW,paramNum,paramArray);

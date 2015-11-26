@@ -202,7 +202,7 @@ enum _MENU_IDS
 #if (_MODEL_DSC_ == _MODEL_CARDV_B50_)
     IDS_MOVIE_HDR           = STRID_WDR,
 #else    
-    IDS_MOVIE_HDR           = STRID_HDR,
+    IDS_MOVIE_HDR           = STRID_WDR,
 #endif    
     IDS_MOVIE_MOTION_DET    = STRID_MOTION_DET,
     IDS_MOVIE_AUDIO         = STRID_RECORD_AUDIO,
@@ -479,7 +479,7 @@ enum _MENU_IDI
 #if(_MODEL_DSC_ == _MODEL_CARDV_B50_)    
     IDI_MOVIE_HDR           = ICON_MENU_WDR,
 #else
-    IDI_MOVIE_HDR           = ICON_MENU_HDR,
+    IDI_MOVIE_HDR           = ICON_MENU_WDR,
 #endif    
     IDI_MOVIE_MOTION_DET    = ICON_MOTION_DET,
     IDI_MOVIE_AUDIO         = ICON_VOICE_M,
