@@ -327,7 +327,7 @@ void BrowseThumbNaviKey(PBROWSE_NAVI_INFO pBrowseNavi)
     UIPlayCommTraceMsg("FileNumsInFinalPage=%d, FileNumsInFinalLine=%d\r\n",FileNumsInFinalPage, FileNumsInFinalLine);
     UIPlayCommTraceMsg("CurrPageID=%d, FinalPageID=%d\r\n",CurrPageID, FinalPageID);
     UIPlayCommTraceMsg("CurThumbNums=%d, CurrThumbRow=%d, FinalThumbRow=%d\r\n",CurThumbNums, CurrThumbRow,FinalThumbRow);
-
+	debug_msg("CurThumbNums=%d, CurrThumbRow=%d, FinalThumbRow=%d\r\n",CurThumbNums, CurrThumbRow,FinalThumbRow);
     // page-direction (LEFT)
     if(pBrowseNavi->NaviKey == NVTEVT_KEY_LEFT)
     {

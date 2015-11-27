@@ -505,7 +505,7 @@ static void FlowPB_IconDrawTime(BOOL bShow)
 
 static void FlowPB_IconDrawThumbSeq(BOOL bShow)
 {
-    static char item1_Buf[32];
+    static char item1_Buf[32] = {0};
     UINT32  *pThumbSeqID;
 
     if (bShow==FALSE)
@@ -516,7 +516,6 @@ static void FlowPB_IconDrawThumbSeq(BOOL bShow)
     pThumbSeqID = (UINT32  *)AppPlay_GetData(PLAY_ALLTHUMBSEQ);
 
     snprintf(item1_Buf,32,"%d/%ld",*(pThumbSeqID + AppPlay_GetData(PLAY_BROWSEINDEX) - 1),AppPlay_GetData(PLAY_FILENUM));
-
     UxStatic_SetData(&UIFlowWndPlayThumb_ThumbIDCtrl,STATIC_VALUE,Txt_Pointer(item1_Buf));
     UxCtrl_SetShow(&UIFlowWndPlayThumb_ThumbIDCtrl, TRUE);
 }

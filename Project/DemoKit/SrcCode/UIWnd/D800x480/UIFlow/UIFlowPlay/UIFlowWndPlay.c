@@ -326,6 +326,7 @@ INT32 UIFlowWndPlay_OnClose(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray
     KeyScan_EnableMisc(TRUE);
 
 	app_reset_playthumb_to_play();
+	Ux_CloseWindow((VControl *)(&UIFlowWndPlayThumbCtrl), 0);
     //#NT#2012/10/23#Philex Lin - end
     //g_PlbData.VideoPBSpeed=PLB_FWD_MOV_1x;
     Ux_DefaultEvent(pCtrl,NVTEVT_CLOSE_WINDOW,paramNum,paramArray);

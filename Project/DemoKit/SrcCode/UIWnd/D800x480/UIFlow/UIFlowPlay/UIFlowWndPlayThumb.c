@@ -249,9 +249,13 @@ INT32 UIFlowWndPlayThumb_OnKeyMenu(VControl *pCtrl, UINT32 paramNum, UINT32 *par
 }
 INT32 UIFlowWndPlayThumb_OnKeyMode(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 {
-    //Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_NEXT);
-    app_reset_playthumb_to_play();
-    Ux_SendEvent(&UISetupObjCtrl,NVTEVT_FORCETO_LIVEVIEW_MODE,0);
+	app_reset_playthumb_to_play();
+	
+	FlowPB_ClearAllThumbIcon();
+    Ux_Redraw();
+    Ux_CloseWindow((VControl *)(&UIFlowWndPlayThumbCtrl), 1, NVTRET_THUMBNAIL);
+	
+    Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_NEXT);
     return NVTEVT_CONSUME;
 }
 INT32 UIFlowWndPlayThumb_OnKeyZoomin(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
