@@ -39,6 +39,7 @@ MEDIAPLAY_OBJ  g_UIPlayMediaObj                 = {0};
 FST_FILE       gphUIFlowMovPlay_Filehdl         = NULL;
 //#NT#2012/08/31#Calvin Chang -end
 
+extern UINT32 app_get_thumbcursel(void);
 
 //---------------------UIFlowWndPlayCtrl Function ---------------------------
 //#NT#2012/08/31#Calvin Chang#Porting Media Flow -begin
@@ -236,7 +237,8 @@ static INT32 UIFlowWndPlay_OnExeDownKeyAct(VControl *pCtrl, UINT32 paramNum, UIN
 INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 {
     UINT32  uiSoundMask,uiStatus;
-
+	UINT32  uiPlayFileNum = 0;
+	UINT32  uiPlayFileCurSel= 0;
     g_bUIFlowWndPlayNoImgWndOpened = FALSE;
 
     Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYINIT,0);
@@ -245,10 +247,17 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
     //PB_OpenSpecFileBySeq(DCF_GetDBInfo(DCF_INFO_TOL_FILE_COUNT), TRUE);
     PB_OpenSpecFileBySeq(AppPlay_GetData(PLAY_FILENUM), TRUE);
 
-    Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYSINGLE, 2, PB_SINGLE_CURR, 1);
-
+    //Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYSINGLE, 2, PB_SINGLE_CURR, 1);
+    uiPlayFileNum = AppPlay_GetData(PLAY_FILENUM);
+	uiPlayFileCurSel = app_get_thumbcursel();
+	if(uiPlayFileCurSel == uiPlayFileNum)
+	{
+		uiPlayFileCurSel = 0;
+	}
+	Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYSINGLE, 2, PB_SINGLE_CURR, uiPlayFileCurSel);
+	debug_msg("uiPlayFileCurSel = %d, uiPlayFileNum = %d\r\n",uiPlayFileCurSel, uiPlayFileNum);
     uiStatus = AppPlay_GetData(PLAY_PBSTATUS);
-
+	
     if (uiStatus & PB_STA_NOIMAGE)
     //if(DCF_GetDBInfo(DCF_INFO_TOL_FILE_COUNT)==0)
     {

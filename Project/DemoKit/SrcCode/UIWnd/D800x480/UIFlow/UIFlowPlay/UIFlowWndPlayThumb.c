@@ -67,7 +67,7 @@ EVENT_ITEM(NVTEVT_KEY_SHUTTER2,UIFlowWndPlayThumb_OnKeyShutter2)
 EVENT_END
 
 static UINT8 PlayThumbToPlay = 0;
-
+	
 UINT8 app_check_playthumb_to_play(void)
 {
 	return PlayThumbToPlay;

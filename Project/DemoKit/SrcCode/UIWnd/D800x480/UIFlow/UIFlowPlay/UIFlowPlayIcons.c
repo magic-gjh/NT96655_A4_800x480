@@ -29,7 +29,13 @@
     DSCMode/Flash/EV Icon/Image size/WB/image quality/sharpness
     DZoom/Battery/Histogram/Protect/Date/Time
 */
+static UINT32 ThumbCurSel = 0;
+UINT32 app_get_thumbcursel(void);
 
+UINT32 app_get_thumbcursel(void)
+{
+	return ThumbCurSel;
+}
 static void FlowPB_IconDrawDSCMode(BOOL bShow)
 {
     UINT32 uiFlag;
@@ -506,8 +512,9 @@ static void FlowPB_IconDrawTime(BOOL bShow)
 static void FlowPB_IconDrawThumbSeq(BOOL bShow)
 {
     static char item1_Buf[32] = {0};
+	static char ThumbCurSel_Buf[8] = {0};
     UINT32  *pThumbSeqID;
-
+	
     if (bShow==FALSE)
     {
         UxCtrl_SetShow(&UIFlowWndPlayThumb_ThumbIDCtrl, FALSE);
@@ -516,6 +523,9 @@ static void FlowPB_IconDrawThumbSeq(BOOL bShow)
     pThumbSeqID = (UINT32  *)AppPlay_GetData(PLAY_ALLTHUMBSEQ);
 
     snprintf(item1_Buf,32,"%d/%ld",*(pThumbSeqID + AppPlay_GetData(PLAY_BROWSEINDEX) - 1),AppPlay_GetData(PLAY_FILENUM));
+	snprintf(ThumbCurSel_Buf,8,"%d",*(pThumbSeqID + AppPlay_GetData(PLAY_BROWSEINDEX) - 1));
+	ThumbCurSel = atoi(ThumbCurSel_Buf);
+	
     UxStatic_SetData(&UIFlowWndPlayThumb_ThumbIDCtrl,STATIC_VALUE,Txt_Pointer(item1_Buf));
     UxCtrl_SetShow(&UIFlowWndPlayThumb_ThumbIDCtrl, TRUE);
 }

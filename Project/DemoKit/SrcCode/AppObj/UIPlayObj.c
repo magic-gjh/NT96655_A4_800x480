@@ -149,7 +149,10 @@ static INT32 UIPlay_OnSingle(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArra
 
 
     if(paramArray[0] & PB_SINGLE_CURR || paramArray[1] == 0)
-        paramArray[1] = 1;
+    {
+    	paramArray[1] = paramArray[1] + 1;
+    }
+	debug_msg("paramArray[1] = %d \r\n", paramArray[1]);
     DBG_MSG("UIPlay_OnSingle paramArray[0]=0x%x,paramArray[1]=%d\r\n",paramArray[0],paramArray[1]);
     if(paramArray[0] & PB_SINGLE_THUMB)
         FlowPlaySingleObj.PlayCommand = (UINT8)paramArray[0];
