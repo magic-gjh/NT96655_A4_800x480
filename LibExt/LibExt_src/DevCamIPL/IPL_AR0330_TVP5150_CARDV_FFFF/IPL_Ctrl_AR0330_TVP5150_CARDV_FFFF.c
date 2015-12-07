@@ -21,7 +21,7 @@ void IPL_SIESetOB_FCB(UINT32 Id, SieFuncEn *FuncEn, SIE_INTE_EN *InteEn, SIE_UPD
 
     if (IPL_CtrlGetInfor(Id, IPLCTRL_PRVAUTO_OB_EN) == DISABLE)
     {
-        OBSub->Offset = 0xa0;  //iso100: 0xa0, iso1600: 0x90
+        OBSub->Offset = 0xa8;  //iso100: 0xa0, iso1600: 0x90
         OBSub->DtGain = 0x20;
         *FuncEn |= OBSubSelEn;
         *Update |= (SIE_OBOFS_ | SIE_SubFEn);

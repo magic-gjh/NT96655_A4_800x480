@@ -1,5 +1,5 @@
 MODELEXT_CARDV_A4_Data/Release/ObjectCode/DxCfg.o: \
- e:/workspace/NT9665X_A4/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxCfg.c \
+ e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxCfg.c \
  ../../../../Include/Drv/ModelExt/DrvExt.h \
  ../../../../Include/Common/Type.h ../../../../Include/Common/StdCMac.h \
  ../../../../Include/Common/Platform.h \

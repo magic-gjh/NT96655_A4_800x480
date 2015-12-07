@@ -57,7 +57,7 @@ AWBALG_ELEMET WhiteIndoorElement[] =
 {
     {AWBALG_TYPE_Y,      220,   10, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RG,     205, 75, { 0, 0}, { 0, 0}},
-    {AWBALG_TYPE_BG,     359, 101, { 0, 0}, { 0, 0}},
+    {AWBALG_TYPE_BG,     309, 83, { 0, 0}, { 0, 0}},//    {AWBALG_TYPE_BG,     359, 101, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RBG,    455,  70, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RBGSUM, 465, 190, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RXBG,   459, 160, { 0, 0}, { 0, 0}},
@@ -69,7 +69,7 @@ AWBALG_ELEMET WhiteOutdoorElement[] =
 {
     {AWBALG_TYPE_Y,      200,   10, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RG,     230, 76, { 0, 0}, { 0, 0}},
-    {AWBALG_TYPE_BG,     348, 122, { 0, 0}, { 0, 0}},
+    {AWBALG_TYPE_BG,     308, 82, { 0, 0}, { 0, 0}},//{AWBALG_TYPE_BG,     348, 122, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RBG,    430,  54, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RBGSUM, 455, 200, { 0, 0}, { 0, 0}},
     {AWBALG_TYPE_RXBG,   439, 185, { 0, 0}, { 0, 0}},

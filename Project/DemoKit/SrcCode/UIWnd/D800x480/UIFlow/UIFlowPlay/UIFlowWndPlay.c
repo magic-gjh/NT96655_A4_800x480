@@ -255,7 +255,6 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 		uiPlayFileCurSel = 0;
 	}
 	Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYSINGLE, 2, PB_SINGLE_CURR, uiPlayFileCurSel);
-	debug_msg("uiPlayFileCurSel = %d, uiPlayFileNum = %d\r\n",uiPlayFileCurSel, uiPlayFileNum);
     uiStatus = AppPlay_GetData(PLAY_PBSTATUS);
 	
     if (uiStatus & PB_STA_NOIMAGE)

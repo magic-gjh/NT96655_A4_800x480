@@ -425,7 +425,7 @@ void AE_WaitStable(UINT32 count)
 
 UINT32 AE_WriteDebugInfo(UINT32 Addr)
 {
-    Addr += sprintf((char *)Addr, "ExpectY = \t%ld\r\nAdd_Y = \t%ld\r\nLumY = \t%ld\r\n",
+    Addr += sprintf((char *)Addr, "21051202ExpectY = \t%ld\r\nAdd_Y = \t%ld\r\nLumY = \t%ld\r\n",
                                             AeInfo.OverExpoInfo.AdjExpextY, AeInfo.OverExpoInfo.AdjY, AeInfo.LumY);
 
     Addr += sprintf((char *)Addr, "PrvEV_Value = \t%ld\r\nPrvLV = \t%ld\r\n",

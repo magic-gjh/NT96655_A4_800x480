@@ -1,7 +1,7 @@
 MODELEXT_CARDV_A4_Data/Release/ObjectCode/DxSound_Audio.o: \
- e:/workspace/NT9665X_A4/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxSound_Audio.c \
- e:/workspace/NT9665X_A4/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxCfg.h \
- e:/workspace/NT9665X_A4/DrvExt/DrvExt_src/ModelExt/CarDV_A4/IOCfg.h \
+ e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxSound_Audio.c \
+ e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxCfg.h \
+ e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/ModelExt/CarDV_A4/IOCfg.h \
  ../../../../Include/Common/Type.h ../../../../Include/Common/StdCMac.h \
  ../../../../Include/Common/Platform.h \
  ../../../../Include/Common/Kernel/mIType.h \
@@ -45,9 +45,9 @@ MODELEXT_CARDV_A4_Data/Release/ObjectCode/DxSound_Audio.o: \
  ../../../../Include/Common/LibC/stddef.h \
  ../../../../Include/Common/LibC/stdlib.h
 
-e:/workspace/NT9665X_A4/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxCfg.h:
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/ModelExt/CarDV_A4/DxCfg.h:
 
-e:/workspace/NT9665X_A4/DrvExt/DrvExt_src/ModelExt/CarDV_A4/IOCfg.h:
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/ModelExt/CarDV_A4/IOCfg.h:
 
 ../../../../Include/Common/Type.h:
 
