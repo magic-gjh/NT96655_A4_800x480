@@ -160,7 +160,7 @@ void Sensor_DetExtSensor(void)
 {
     static UINT32 bDebounceCount = 0;
 	static UINT8 SecondSensorflag = 0;
-#if 0//(_MODEL_DSC_ == _MODEL_DUAL_790S_)
+#if 1//(_MODEL_DSC_ == _MODEL_DUAL_790S_)
     if (System_GetState(SYS_STATE_CURRMODE) != PRIMARY_MODE_MOVIE)
         return;
 #endif

@@ -240,13 +240,10 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 	UINT32  uiPlayFileNum = 0;
 	UINT32  uiPlayFileCurSel= 0;
     g_bUIFlowWndPlayNoImgWndOpened = FALSE;
-
     Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYINIT,0);
     //After playback ready, point to the last file
-
     //PB_OpenSpecFileBySeq(DCF_GetDBInfo(DCF_INFO_TOL_FILE_COUNT), TRUE);
     PB_OpenSpecFileBySeq(AppPlay_GetData(PLAY_FILENUM), TRUE);
-
     //Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYSINGLE, 2, PB_SINGLE_CURR, 1);
     uiPlayFileNum = AppPlay_GetData(PLAY_FILENUM);
 	uiPlayFileCurSel = app_get_thumbcursel();
@@ -256,7 +253,6 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 	}
 	Ux_SendEvent(&UIPlayObjCtrl,NVTEVT_PLAYSINGLE, 2, PB_SINGLE_CURR, uiPlayFileCurSel);
     uiStatus = AppPlay_GetData(PLAY_PBSTATUS);
-	
     if (uiStatus & PB_STA_NOIMAGE)
     //if(DCF_GetDBInfo(DCF_INFO_TOL_FILE_COUNT)==0)
     {
@@ -265,7 +261,7 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
     }
     else
     {
-        g_PlbData.VideoPBSpeed=PLB_FWD_MOV_1x;
+        g_PlbData.VideoPBSpeed = PLB_FWD_MOV_1x;
         g_PlbData.State = PLB_ST_FULL;
         UIFlowWndPlay_CheckStatus();
         FlowPB_UpdateIcons(1);
@@ -275,7 +271,6 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
     uiSoundMask = Input_GetKeySoundMask(KEY_PRESS);
     uiSoundMask |= FLGKEY_SHUTTER2;
     Input_SetKeySoundMask(KEY_PRESS, uiSoundMask);
-
     // Set mask key
     Ux_FlushEventByRange(NVTEVT_KEY_EVT_START,NVTEVT_KEY_EVT_END);
     Input_SetKeyMask(KEY_PRESS, PLAY_KEY_PRESS_MASK);
@@ -287,10 +282,9 @@ INT32 UIFlowWndPlay_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 	//UIFlowWndPlay_OnExeDownKeyAct(pCtrl, paramNum, paramArray);
 	if(app_check_playthumb_to_play() == 0)
 	{
-		Ux_CloseWindow((VControl *)(&UIFlowWndPlayCtrl),0);
+		//Ux_CloseWindow((VControl *)(&UIFlowWndPlayCtrl),0);
 		Ux_OpenWindow((VControl *)(&UIFlowWndPlayThumbCtrl), 0);
 	}
-	
     Ux_DefaultEvent(pCtrl,NVTEVT_OPEN_WINDOW,paramNum,paramArray);
     return NVTEVT_CONSUME;
 }
@@ -632,6 +626,7 @@ INT32 UIFlowWndPlay_OnKeyMode(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArr
         Input_SetKeyMask(KEY_RELEASE, FLGKEY_KEY_MASK_NULL);
         Input_SetKeyMask(KEY_CONTINUE, FLGKEY_KEY_MASK_NULL);
 		app_reset_playthumb_to_play();
+		Ux_CloseWindow((VControl *)(&UIFlowWndPlayCtrl),0);
         Ux_SendEvent(&UISetupObjCtrl,NVTEVT_EXE_CHANGEDSCMODE,1,DSCMODE_CHGTO_NEXT);
         break;
     }

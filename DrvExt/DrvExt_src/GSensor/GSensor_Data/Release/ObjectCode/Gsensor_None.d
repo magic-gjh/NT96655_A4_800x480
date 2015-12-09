@@ -1,11 +1,11 @@
 GSensor_Data/Release/ObjectCode/Gsensor_None.o: \
- e:/PARTNERWIN_/NT9665x_CarDV_FW_20150122_PW84/DrvExt/DrvExt_src/GSensor/Gsensor_None/Gsensor_None.c \
+ e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/GSensor/Gsensor_None/Gsensor_None.c \
  ../../../Include/DrvExt/GSensor/GSensor.h \
  ../../../Include/Drv/Driver_Sys/i2c.h \
  ../../../Include/Drv/Driver_Sys/Driver.h ../../../Include/Common/Type.h \
  ../../../Include/Common/StdCMac.h ../../../Include/Common/Platform.h \
  ../../../Include/Common/Kernel/mIType.h \
- e:/PARTNERWIN_/NT9665x_CarDV_FW_20150122_PW84/DrvExt/DrvExt_src/GSensor/Gsensor_None/GSensor_None.h \
+ e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/GSensor/Gsensor_None/GSensor_None.h \
  ../../../Include/DrvExt/ModelExt/IOInit.h \
  ../../../Include/Drv/Driver_Sys/pad.h \
  ../../../Include/Drv/Driver_Sys/top.h \
@@ -27,7 +27,7 @@ GSensor_Data/Release/ObjectCode/Gsensor_None.o: \
 
 ../../../Include/Common/Kernel/mIType.h:
 
-e:/PARTNERWIN_/NT9665x_CarDV_FW_20150122_PW84/DrvExt/DrvExt_src/GSensor/Gsensor_None/GSensor_None.h:
+e:/workspace/NT96655_A4_800x480/DrvExt/DrvExt_src/GSensor/Gsensor_None/GSensor_None.h:
 
 ../../../Include/DrvExt/ModelExt/IOInit.h:
 

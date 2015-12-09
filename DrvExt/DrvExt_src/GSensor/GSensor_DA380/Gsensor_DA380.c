@@ -141,7 +141,8 @@ int mir3da_chip_init(void){
 	res |= mir3da_register_mask_write(NSA_REG_POWERMODE_BW, 0xFF, 0x1E);
 	res |= mir3da_register_mask_write(NSA_REG_ODR_AXIS_DISABLE, 0xFF, 0x07);
 	
-	res |= mir3da_register_mask_write(NSA_REG_INT_LATCH, 0x8F, 0x8F);
+	res |= mir3da_register_mask_write(NSA_REG_INT_LATCH, 0x8F, 0x85);
+	res |= mir3da_register_mask_write(NSA_REG_INT_PIN_CONFIG, 0x0F, 0x00);
 	
 	res |= mir3da_register_mask_write(NSA_REG_ENGINEERING_MODE, 0xFF, 0x83);
 	res |= mir3da_register_mask_write(NSA_REG_ENGINEERING_MODE, 0xFF, 0x69);
@@ -156,7 +157,7 @@ int mir3da_open_interrupt(int num){
 
 	res = mir3da_register_write(NSA_REG_INTERRUPT_SETTINGS1,0x03);
 	res = mir3da_register_write(NSA_REG_ACTIVE_DURATION,0x01 );// 0x03
-	res = mir3da_register_write(NSA_REG_ACTIVE_THRESHOLD,0x26 );////DEBUG//38//DF
+	res = mir3da_register_write(NSA_REG_ACTIVE_THRESHOLD,0x13 );////DEBUG//38//DF
 			
 	switch(num){
 
